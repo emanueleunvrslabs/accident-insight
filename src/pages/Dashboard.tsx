@@ -5,6 +5,7 @@ import { IncidentFiltersBar } from '@/components/incidents/IncidentFilters';
 import { IncidentList } from '@/components/incidents/IncidentList';
 import { IncidentDetail } from '@/components/incidents/IncidentDetail';
 import { AddArticleDialog } from '@/components/incidents/AddArticleDialog';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import type { IncidentFilters } from '@/types/incident';
 
 export default function Dashboard() {
@@ -12,7 +13,7 @@ export default function Dashboard() {
   const [selectedIncidentId, setSelectedIncidentId] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-background dark">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
@@ -28,7 +29,10 @@ export default function Dashboard() {
                 </p>
               </div>
             </div>
-            <AddArticleDialog />
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <AddArticleDialog />
+            </div>
           </div>
         </div>
       </header>
