@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Scale, Shield, BarChart3 } from 'lucide-react';
+import { Scale, Shield, BarChart3, Sparkles } from 'lucide-react';
 import { StatsCards } from '@/components/dashboard/StatsCards';
 import { IncidentFiltersBar } from '@/components/incidents/IncidentFilters';
 import { IncidentList } from '@/components/incidents/IncidentList';
@@ -14,23 +14,26 @@ export default function Dashboard() {
   const [selectedIncidentId, setSelectedIncidentId] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card sticky top-0 z-50">
+    <div className="min-h-screen bg-gradient-mesh">
+      {/* Header - Glass effect */}
+      <header className="sticky top-0 z-50 glass-strong border-b-0">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-              <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10 shrink-0">
-                <Scale className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+              <div className="relative p-2 sm:p-2.5 rounded-2xl bg-gradient-to-br from-primary to-accent shrink-0 shadow-glow">
+                <Scale className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                <Sparkles className="absolute -top-1 -right-1 h-3 w-3 text-warning animate-pulse-soft" />
               </div>
               <div className="min-w-0">
-                <h1 className="text-base sm:text-xl font-bold truncate">Monitoraggio Incidenti</h1>
+                <h1 className="text-base sm:text-xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                  Monitoraggio Incidenti
+                </h1>
                 <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">
                   Sistema AI per sinistri stradali mortali
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <ThemeToggle />
               <ManageFeedsDialog />
               <AddArticleDialog />
@@ -52,7 +55,7 @@ export default function Dashboard() {
             <StatsCards />
 
             {/* Filters */}
-            <div className="bg-card rounded-lg border border-border p-3 sm:p-4">
+            <div className="glass rounded-2xl p-3 sm:p-4 shadow-liquid animate-slide-up">
               <IncidentFiltersBar filters={filters} onFiltersChange={setFilters} />
             </div>
 
@@ -65,17 +68,21 @@ export default function Dashboard() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-card mt-auto">
+      {/* Footer - Glass effect */}
+      <footer className="glass-subtle border-t-0 mt-auto">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <div className="p-1.5 rounded-lg bg-primary/10">
+                <Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+              </div>
               <span>Sistema riservato</span>
             </div>
             <div className="flex items-center gap-2">
-              <BarChart3 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              <span>Dati elaborati con AI</span>
+              <div className="p-1.5 rounded-lg bg-accent/10">
+                <BarChart3 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent" />
+              </div>
+              <span>Elaborato con AI</span>
             </div>
           </div>
         </div>

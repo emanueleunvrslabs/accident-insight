@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Rss, Plus, Trash2, ExternalLink, Loader2, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Rss, Plus, Trash2, ExternalLink, Loader2, ToggleLeft, ToggleRight, Globe, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -104,39 +104,46 @@ export function ManageFeedsDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-1 sm:gap-2 px-2 sm:px-4">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="gap-1 sm:gap-2 px-2 sm:px-3 h-9 rounded-xl bg-muted/50 hover:bg-muted/80"
+        >
           <Rss className="h-4 w-4" />
-          <span className="hidden sm:inline">Gestisci fonti</span>
-          <span className="sm:hidden">Fonti</span>
+          <span className="hidden sm:inline">Fonti</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] max-h-[85vh]">
+      <DialogContent className="sm:max-w-[600px] max-h-[85vh] rounded-2xl glass border-0">
         <DialogHeader>
-          <DialogTitle>Fonti di notizie</DialogTitle>
+          <DialogTitle className="flex items-center gap-2">
+            <Globe className="h-5 w-5 text-primary" />
+            Fonti di notizie
+          </DialogTitle>
           <DialogDescription>
-            Aggiungi e gestisci le fonti online (giornali, RSS, siti web) da monitorare per identificare incidenti stradali.
+            Gestisci le fonti online da monitorare per identificare incidenti stradali.
           </DialogDescription>
         </DialogHeader>
 
         {/* Add new feed form */}
-        <form onSubmit={handleSubmit} className="space-y-4 border-b border-border pb-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="space-y-4 border-b border-border/50 pb-4">
+          <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <Label htmlFor="name">Nome fonte</Label>
+              <Label htmlFor="name" className="text-xs">Nome fonte</Label>
               <Input
                 id="name"
                 placeholder="es. ANSA Cronaca"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                className="h-10 rounded-xl border-0 bg-muted/50"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="type">Tipo</Label>
+              <Label htmlFor="type" className="text-xs">Tipo</Label>
               <Select value={feedType} onValueChange={setFeedType}>
-                <SelectTrigger>
+                <SelectTrigger className="h-10 rounded-xl border-0 bg-muted/50">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="rounded-xl">
                   <SelectItem value="web">Sito Web</SelectItem>
                   <SelectItem value="rss">Feed RSS</SelectItem>
                   <SelectItem value="google-news">Google News</SelectItem>
@@ -145,16 +152,21 @@ export function ManageFeedsDialog() {
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="url">URL</Label>
+            <Label htmlFor="url" className="text-xs">URL</Label>
             <Input
               id="url"
               type="url"
               placeholder="https://www.ansa.it/cronaca/"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
+              className="h-10 rounded-xl border-0 bg-muted/50"
             />
           </div>
-          <Button type="submit" disabled={addFeed.isPending} className="w-full">
+          <Button 
+            type="submit" 
+            disabled={addFeed.isPending} 
+            className="w-full h-11 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
+          >
             {addFeed.isPending ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -171,77 +183,79 @@ export function ManageFeedsDialog() {
 
         {/* Existing feeds list */}
         <div className="space-y-2">
-          <h4 className="text-sm font-medium text-muted-foreground">
+          <h4 className="text-xs font-medium text-muted-foreground flex items-center gap-2">
+            <Sparkles className="h-3 w-3" />
             Fonti configurate ({feeds?.length || 0})
           </h4>
-          <ScrollArea className="h-[300px] pr-4">
+          <ScrollArea className="h-[280px] pr-4 scrollbar-glass">
             {isLoading ? (
               <div className="flex items-center justify-center py-8">
-                <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                <Loader2 className="h-6 w-6 animate-spin text-primary" />
               </div>
             ) : feeds?.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
-                <Rss className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                <p>Nessuna fonte configurata</p>
-                <p className="text-sm">Aggiungi la prima fonte di notizie sopra</p>
+                <div className="p-4 rounded-2xl bg-muted/30 inline-block mb-3">
+                  <Rss className="h-8 w-8 opacity-50" />
+                </div>
+                <p className="font-medium">Nessuna fonte configurata</p>
+                <p className="text-xs mt-1">Aggiungi la prima fonte sopra</p>
               </div>
             ) : (
               <div className="space-y-2">
                 {feeds?.map((feed) => (
                   <div
                     key={feed.id}
-                    className="flex items-center justify-between p-3 rounded-lg border border-border bg-card hover:bg-accent/50 transition-colors"
+                    className="glass-subtle rounded-xl p-3 hover:bg-muted/30 transition-colors"
                   >
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium truncate">{feed.name}</span>
-                        <Badge variant={feed.is_active ? 'default' : 'secondary'} className="text-xs">
-                          {feed.feed_type}
-                        </Badge>
-                        {!feed.is_active && (
-                          <Badge variant="outline" className="text-xs text-muted-foreground">
-                            Disattivato
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-medium text-sm truncate">{feed.name}</span>
+                          <Badge 
+                            variant="outline" 
+                            className="badge-pill text-[10px] bg-primary/10 text-primary border-primary/20"
+                          >
+                            {feed.feed_type}
                           </Badge>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-2 mt-1">
+                          {!feed.is_active && (
+                            <Badge variant="outline" className="badge-pill text-[10px] bg-muted/50 text-muted-foreground">
+                              Off
+                            </Badge>
+                          )}
+                        </div>
                         <a
                           href={feed.feed_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-muted-foreground hover:text-primary truncate max-w-[300px] flex items-center gap-1"
+                          className="text-[11px] text-muted-foreground hover:text-primary truncate max-w-[280px] flex items-center gap-1"
                         >
                           {feed.feed_url}
-                          <ExternalLink className="h-3 w-3 flex-shrink-0" />
+                          <ExternalLink className="h-2.5 w-2.5 flex-shrink-0" />
                         </a>
                       </div>
-                      {feed.last_fetched_at && (
-                        <p className="text-xs text-muted-foreground mt-1">
-                          Ultimo controllo: {format(new Date(feed.last_fetched_at), "dd MMM yyyy HH:mm", { locale: it })}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1 ml-2">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleToggle(feed.id, feed.is_active)}
-                        title={feed.is_active ? 'Disattiva' : 'Attiva'}
-                      >
-                        {feed.is_active ? (
-                          <ToggleRight className="h-5 w-5 text-primary" />
-                        ) : (
-                          <ToggleLeft className="h-5 w-5 text-muted-foreground" />
-                        )}
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleDelete(feed.id, feed.name)}
-                        className="text-destructive hover:text-destructive"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleToggle(feed.id, feed.is_active)}
+                          className="h-8 w-8 rounded-lg hover:bg-muted/50"
+                          title={feed.is_active ? 'Disattiva' : 'Attiva'}
+                        >
+                          {feed.is_active ? (
+                            <ToggleRight className="h-5 w-5 text-success" />
+                          ) : (
+                            <ToggleLeft className="h-5 w-5 text-muted-foreground" />
+                          )}
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(feed.id, feed.name)}
+                          className="h-8 w-8 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 ))}

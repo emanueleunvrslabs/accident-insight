@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Link, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { Plus, Link, Loader2, CheckCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -77,30 +77,35 @@ export function AddArticleDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" className="gap-1 sm:gap-2 px-2 sm:px-4">
+        <Button 
+          size="sm" 
+          className="gap-1 sm:gap-2 px-2 sm:px-3 h-9 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-glow"
+        >
           <Plus className="h-4 w-4" />
-          <span className="hidden sm:inline">Aggiungi articolo</span>
-          <span className="sm:hidden">Aggiungi</span>
+          <span className="hidden sm:inline">Aggiungi</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[500px] rounded-2xl glass border-0">
         <DialogHeader>
-          <DialogTitle>Aggiungi articolo manualmente</DialogTitle>
+          <DialogTitle className="flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-primary" />
+            Aggiungi articolo
+          </DialogTitle>
           <DialogDescription>
-            Inserisci i dettagli di un articolo su un incidente stradale. L'AI analizzerà e classificherà automaticamente l'articolo.
+            L'AI analizzerà e classificherà automaticamente l'articolo.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="url">URL articolo *</Label>
+              <Label htmlFor="url" className="text-xs">URL articolo *</Label>
               <div className="relative">
                 <Link className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="url"
                   type="url"
                   placeholder="https://..."
-                  className="pl-10"
+                  className="pl-10 h-11 rounded-xl border-0 bg-muted/50"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   required
@@ -109,45 +114,57 @@ export function AddArticleDialog() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="title">Titolo articolo *</Label>
+              <Label htmlFor="title" className="text-xs">Titolo articolo *</Label>
               <Input
                 id="title"
                 placeholder="Titolo dell'articolo"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                className="h-11 rounded-xl border-0 bg-muted/50"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="source">Nome fonte</Label>
+              <Label htmlFor="source" className="text-xs">Nome fonte</Label>
               <Input
                 id="source"
                 placeholder="es. ANSA, Il Corriere, La Repubblica..."
                 value={sourceName}
                 onChange={(e) => setSourceName(e.target.value)}
+                className="h-11 rounded-xl border-0 bg-muted/50"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="snippet">Testo/estratto (opzionale)</Label>
+              <Label htmlFor="snippet" className="text-xs">Testo/estratto (opzionale)</Label>
               <Textarea
                 id="snippet"
-                placeholder="Copia qui il testo principale dell'articolo per una migliore analisi..."
+                placeholder="Copia qui il testo principale dell'articolo..."
                 rows={4}
                 value={snippet}
                 onChange={(e) => setSnippet(e.target.value)}
+                className="rounded-xl border-0 bg-muted/50 resize-none"
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-[10px] text-muted-foreground">
                 Fornire il testo migliora l'accuratezza dell'estrazione dati.
               </p>
             </div>
           </div>
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+          <DialogFooter className="gap-2">
+            <Button 
+              type="button" 
+              variant="ghost" 
+              onClick={() => setOpen(false)}
+              className="rounded-xl"
+            >
               Annulla
             </Button>
-            <Button type="submit" disabled={processArticle.isPending}>
+            <Button 
+              type="submit" 
+              disabled={processArticle.isPending}
+              className="rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90"
+            >
               {processArticle.isPending ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -156,7 +173,7 @@ export function AddArticleDialog() {
               ) : (
                 <>
                   <CheckCircle className="h-4 w-4 mr-2" />
-                  Elabora articolo
+                  Elabora
                 </>
               )}
             </Button>

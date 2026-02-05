@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Professional Dark Theme for Law Firm Dashboard */
+/* iOS 26 Liquid Glass Theme */
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
+    --background: 220 20% 96%;
     --foreground: 220 30% 10%;
 
     --card: 0 0% 100%;
@@ -15,86 +15,96 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 30% 10%;
 
-    --primary: 220 70% 45%;
+    --primary: 210 100% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 15% 92%;
     --secondary-foreground: 220 30% 15%;
 
-    --muted: 220 15% 95%;
-    --muted-foreground: 220 15% 45%;
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 15% 40%;
 
-    --accent: 35 90% 50%;
+    --accent: 280 80% 60%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 75% 50%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 145 60% 40%;
+    --success: 160 80% 45%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 35 90% 50%;
+    --warning: 40 95% 55%;
     --warning-foreground: 0 0% 100%;
 
     --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 220 70% 45%;
+    --input: 220 15% 90%;
+    --ring: 210 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
-    --sidebar-background: 220 25% 12%;
-    --sidebar-foreground: 220 10% 85%;
-    --sidebar-primary: 220 70% 55%;
+    /* Glass effect variables */
+    --glass-bg: 0 0% 100% / 0.7;
+    --glass-border: 0 0% 100% / 0.5;
+    --glass-blur: 20px;
+
+    --sidebar-background: 220 25% 98%;
+    --sidebar-foreground: 220 30% 20%;
+    --sidebar-primary: 210 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 20% 18%;
-    --sidebar-accent-foreground: 220 10% 90%;
-    --sidebar-border: 220 20% 20%;
-    --sidebar-ring: 220 70% 55%;
+    --sidebar-accent: 220 20% 94%;
+    --sidebar-accent-foreground: 220 30% 15%;
+    --sidebar-border: 220 15% 90%;
+    --sidebar-ring: 210 100% 50%;
   }
 
   .dark {
-    --background: 220 25% 8%;
-    --foreground: 220 10% 92%;
+    --background: 230 25% 7%;
+    --foreground: 220 20% 95%;
 
-    --card: 220 25% 11%;
-    --card-foreground: 220 10% 92%;
+    --card: 230 25% 12%;
+    --card-foreground: 220 20% 95%;
 
-    --popover: 220 25% 11%;
-    --popover-foreground: 220 10% 92%;
+    --popover: 230 25% 12%;
+    --popover-foreground: 220 20% 95%;
 
-    --primary: 220 70% 55%;
+    --primary: 210 100% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 20% 18%;
-    --secondary-foreground: 220 10% 85%;
+    --secondary: 230 20% 18%;
+    --secondary-foreground: 220 20% 90%;
 
-    --muted: 220 20% 15%;
+    --muted: 230 20% 15%;
     --muted-foreground: 220 15% 55%;
 
-    --accent: 35 85% 55%;
+    --accent: 280 80% 65%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 70% 45%;
+    --destructive: 0 80% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 145 55% 45%;
+    --success: 160 70% 50%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 35 85% 55%;
+    --warning: 40 90% 55%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 220 20% 18%;
-    --input: 220 20% 18%;
-    --ring: 220 70% 55%;
+    --border: 230 20% 18%;
+    --input: 230 20% 16%;
+    --ring: 210 100% 60%;
 
-    --sidebar-background: 220 30% 6%;
-    --sidebar-foreground: 220 10% 85%;
-    --sidebar-primary: 220 70% 55%;
+    /* Glass effect variables - dark */
+    --glass-bg: 230 25% 15% / 0.6;
+    --glass-border: 230 20% 25% / 0.5;
+    --glass-blur: 24px;
+
+    --sidebar-background: 230 30% 5%;
+    --sidebar-foreground: 220 20% 90%;
+    --sidebar-primary: 210 100% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 25% 12%;
-    --sidebar-accent-foreground: 220 10% 90%;
-    --sidebar-border: 220 25% 12%;
-    --sidebar-ring: 220 70% 55%;
+    --sidebar-accent: 230 25% 12%;
+    --sidebar-accent-foreground: 220 20% 90%;
+    --sidebar-border: 230 25% 12%;
+    --sidebar-ring: 210 100% 60%;
   }
 }
 
@@ -109,24 +119,158 @@
   }
 }
 
-/* Custom scrollbar for dark theme */
+/* Glass morphism utilities */
 @layer utilities {
-  .scrollbar-dark::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid hsl(var(--glass-border));
   }
 
-  .scrollbar-dark::-webkit-scrollbar-track {
-    background: hsl(var(--muted));
-    border-radius: 4px;
+  .glass-strong {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid hsl(var(--glass-border));
   }
 
-  .scrollbar-dark::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.3);
-    border-radius: 4px;
+  .glass-subtle {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--glass-border));
   }
 
-  .scrollbar-dark::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground) / 0.5);
+  /* Gradient backgrounds */
+  .bg-gradient-mesh {
+    background: 
+      radial-gradient(at 40% 20%, hsl(210 100% 60% / 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsl(280 80% 65% / 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsl(160 70% 50% / 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, hsl(40 90% 55% / 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsl(210 100% 60% / 0.1) 0px, transparent 50%),
+      hsl(var(--background));
+  }
+
+  .dark .bg-gradient-mesh {
+    background: 
+      radial-gradient(at 40% 20%, hsl(210 100% 60% / 0.12) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsl(280 80% 65% / 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsl(160 70% 50% / 0.08) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, hsl(40 90% 55% / 0.06) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsl(210 100% 60% / 0.08) 0px, transparent 50%),
+      hsl(var(--background));
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.1);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.3), 0 0 40px hsl(var(--accent) / 0.1);
+  }
+
+  .glow-destructive {
+    box-shadow: 0 0 15px hsl(var(--destructive) / 0.4);
+  }
+
+  /* Liquid card shadows */
+  .shadow-liquid {
+    box-shadow: 
+      0 1px 2px hsl(var(--foreground) / 0.04),
+      0 4px 8px hsl(var(--foreground) / 0.04),
+      0 8px 16px hsl(var(--foreground) / 0.04),
+      0 16px 32px hsl(var(--foreground) / 0.02);
+  }
+
+  .dark .shadow-liquid {
+    box-shadow: 
+      0 1px 2px hsl(0 0% 0% / 0.2),
+      0 4px 8px hsl(0 0% 0% / 0.2),
+      0 8px 16px hsl(0 0% 0% / 0.15),
+      0 16px 32px hsl(0 0% 0% / 0.1);
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-glass::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-glass::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-glass::-webkit-scrollbar-thumb {
+    background: hsl(var(--foreground) / 0.15);
+    border-radius: 3px;
+  }
+
+  .scrollbar-glass::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--foreground) / 0.25);
+  }
+
+  /* iOS-style spring animations */
+  .animate-spring {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .animate-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Card hover effects */
+@layer components {
+  .card-glass {
+    @apply glass rounded-2xl shadow-liquid transition-all duration-300;
+  }
+
+  .card-glass:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  .btn-glass {
+    @apply glass-subtle rounded-xl px-4 py-2 font-medium transition-all duration-200;
+  }
+
+  .btn-glass:hover {
+    @apply bg-white/20 dark:bg-white/10;
+  }
+
+  .btn-glass:active {
+    transform: scale(0.98);
+  }
+
+  /* iOS-style pill badges */
+  .badge-pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
+  }
+
+  /* Animated gradient border */
+  .border-gradient {
+    position: relative;
+    border: none;
+  }
+
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.5), hsl(var(--accent) / 0.5));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
   }
 }

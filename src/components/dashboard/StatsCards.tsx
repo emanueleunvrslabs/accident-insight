@@ -1,7 +1,6 @@
 import { useIncidentStats } from '@/hooks/useIncidents';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { AlertTriangle, MapPin, Car, Users } from 'lucide-react';
+import { AlertTriangle, MapPin, Car, Users, TrendingUp } from 'lucide-react';
 import { ACCIDENT_TYPE_LABELS } from '@/types/incident';
 
 export function StatsCards() {
@@ -11,7 +10,11 @@ export function StatsCards() {
     return (
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {[...Array(4)].map((_, i) => (
-          <Skeleton key={i} className="h-24 sm:h-28" />
+          <div key={i} className="glass rounded-2xl p-4 sm:p-5 animate-pulse">
+            <Skeleton className="h-4 w-20 mb-3" />
+            <Skeleton className="h-8 w-16 mb-2" />
+            <Skeleton className="h-3 w-24" />
+          </div>
         ))}
       </div>
     );
@@ -22,61 +25,82 @@ export function StatsCards() {
   const topRegion = Object.entries(stats.byRegion).sort((a, b) => b[1] - a[1])[0];
   const topType = Object.entries(stats.byType).sort((a, b) => b[1] - a[1])[0];
 
+  const cards = [
+    {
+      title: "Incidenti totali",
+      value: stats.totalIncidents,
+      subtitle: "Casi monitorati",
+      icon: AlertTriangle,
+      gradient: "from-primary/20 to-primary/5",
+      iconBg: "bg-primary/20",
+      iconColor: "text-primary",
+      glow: "group-hover:shadow-[0_0_30px_hsl(var(--primary)/0.3)]",
+    },
+    {
+      title: "Vittime totali",
+      value: stats.totalDeceased,
+      subtitle: "Decessi registrati",
+      icon: Users,
+      gradient: "from-destructive/20 to-destructive/5",
+      iconBg: "bg-destructive/20",
+      iconColor: "text-destructive",
+      glow: "group-hover:shadow-[0_0_30px_hsl(var(--destructive)/0.3)]",
+      valueColor: "text-destructive",
+    },
+    {
+      title: "Regione top",
+      value: topRegion?.[0] || '-',
+      subtitle: topRegion ? `${topRegion[1]} incidenti` : 'Nessun dato',
+      icon: MapPin,
+      gradient: "from-success/20 to-success/5",
+      iconBg: "bg-success/20",
+      iconColor: "text-success",
+      glow: "group-hover:shadow-[0_0_30px_hsl(var(--success)/0.3)]",
+    },
+    {
+      title: "Tipo frequente",
+      value: topType ? ACCIDENT_TYPE_LABELS[topType[0] as keyof typeof ACCIDENT_TYPE_LABELS] || topType[0] : '-',
+      subtitle: topType ? `${topType[1]} casi` : 'Nessun dato',
+      icon: Car,
+      gradient: "from-accent/20 to-accent/5",
+      iconBg: "bg-accent/20",
+      iconColor: "text-accent",
+      glow: "group-hover:shadow-[0_0_30px_hsl(var(--accent)/0.3)]",
+    },
+  ];
+
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
-          <CardTitle className="text-xs sm:text-sm font-medium">Incidenti totali</CardTitle>
-          <AlertTriangle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
-          <div className="text-xl sm:text-2xl font-bold">{stats.totalIncidents}</div>
-          <p className="text-[10px] sm:text-xs text-muted-foreground">
-            Casi monitorati
-          </p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
-          <CardTitle className="text-xs sm:text-sm font-medium">Vittime totali</CardTitle>
-          <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-destructive" />
-        </CardHeader>
-        <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
-          <div className="text-xl sm:text-2xl font-bold text-destructive">{stats.totalDeceased}</div>
-          <p className="text-[10px] sm:text-xs text-muted-foreground">
-            Decessi registrati
-          </p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
-          <CardTitle className="text-xs sm:text-sm font-medium truncate">Regione top</CardTitle>
-          <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground shrink-0" />
-        </CardHeader>
-        <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
-          <div className="text-lg sm:text-2xl font-bold truncate">{topRegion?.[0] || '-'}</div>
-          <p className="text-[10px] sm:text-xs text-muted-foreground">
-            {topRegion ? `${topRegion[1]} incidenti` : 'Nessun dato'}
-          </p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
-          <CardTitle className="text-xs sm:text-sm font-medium truncate">Tipo frequente</CardTitle>
-          <Car className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground shrink-0" />
-        </CardHeader>
-        <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
-          <div className="text-lg sm:text-2xl font-bold truncate">
-            {topType ? ACCIDENT_TYPE_LABELS[topType[0] as keyof typeof ACCIDENT_TYPE_LABELS] || topType[0] : '-'}
+      {cards.map((card, index) => (
+        <div
+          key={card.title}
+          className={`group glass rounded-2xl p-3 sm:p-5 shadow-liquid transition-all duration-500 hover:-translate-y-1 ${card.glow} animate-slide-up`}
+          style={{ animationDelay: `${index * 100}ms` }}
+        >
+          {/* Gradient overlay */}
+          <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${card.gradient} opacity-50`} />
+          
+          <div className="relative">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <span className="text-[10px] sm:text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                {card.title}
+              </span>
+              <div className={`p-1.5 sm:p-2 rounded-xl ${card.iconBg} transition-transform duration-300 group-hover:scale-110`}>
+                <card.icon className={`h-3 w-3 sm:h-4 sm:w-4 ${card.iconColor}`} />
+              </div>
+            </div>
+            
+            <div className={`text-xl sm:text-3xl font-bold mb-1 truncate ${card.valueColor || ''}`}>
+              {card.value}
+            </div>
+            
+            <div className="flex items-center gap-1 text-[10px] sm:text-xs text-muted-foreground">
+              <TrendingUp className="h-3 w-3 text-success" />
+              <span className="truncate">{card.subtitle}</span>
+            </div>
           </div>
-          <p className="text-[10px] sm:text-xs text-muted-foreground">
-            {topType ? `${topType[1]} casi` : 'Nessun dato'}
-          </p>
-        </CardContent>
-      </Card>
+        </div>
+      ))}
     </div>
   );
 }
