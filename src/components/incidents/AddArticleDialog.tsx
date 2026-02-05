@@ -77,9 +77,10 @@ export function AddArticleDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          Aggiungi articolo
+        <Button size="sm" className="gap-1 sm:gap-2 px-2 sm:px-4">
+          <Plus className="h-4 w-4" />
+          <span className="hidden sm:inline">Aggiungi articolo</span>
+          <span className="sm:hidden">Aggiungi</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
