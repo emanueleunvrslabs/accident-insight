@@ -5,6 +5,7 @@ import { IncidentFiltersBar } from '@/components/incidents/IncidentFilters';
 import { IncidentList } from '@/components/incidents/IncidentList';
 import { IncidentDetail } from '@/components/incidents/IncidentDetail';
 import { AddArticleDialog } from '@/components/incidents/AddArticleDialog';
+import { ManageFeedsDialog } from '@/components/feeds/ManageFeedsDialog';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import type { IncidentFilters } from '@/types/incident';
 
@@ -31,6 +32,7 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-3">
               <ThemeToggle />
+              <ManageFeedsDialog />
               <AddArticleDialog />
             </div>
           </div>
