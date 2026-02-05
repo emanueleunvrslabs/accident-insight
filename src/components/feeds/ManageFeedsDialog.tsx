@@ -104,9 +104,10 @@ export function ManageFeedsDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          <Rss className="h-4 w-4 mr-2" />
-          Gestisci fonti
+        <Button variant="outline" size="sm" className="gap-1 sm:gap-2 px-2 sm:px-4">
+          <Rss className="h-4 w-4" />
+          <span className="hidden sm:inline">Gestisci fonti</span>
+          <span className="sm:hidden">Fonti</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] max-h-[85vh]">
