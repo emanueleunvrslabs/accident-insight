@@ -4,7 +4,6 @@ import { FloatingFilters } from '@/components/FloatingFilters';
 import { StatsCards } from '@/components/dashboard/StatsCards';
 import { IncidentList } from '@/components/incidents/IncidentList';
 import { IncidentDetail } from '@/components/incidents/IncidentDetail';
-import { AlertTriangle } from 'lucide-react';
 import { useSearch } from '@/contexts/SearchContext';
 import type { IncidentFilters } from '@/types/incident';
 
@@ -35,17 +34,6 @@ export default function Incidenti() {
 
             {/* Floating Filters - positioned after stats */}
             <FloatingFilters filters={filters} onFiltersChange={setFilters} />
-
-            {/* Header */}
-            <div className="flex items-center gap-3 pt-16 md:pt-12">
-              <div className="p-3 rounded-2xl bg-primary/10">
-                <AlertTriangle className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-bold">Incidenti</h1>
-                <p className="text-muted-foreground text-sm">Elenco completo degli incidenti monitorati</p>
-              </div>
-            </div>
 
             {/* Incident list */}
             <IncidentList
