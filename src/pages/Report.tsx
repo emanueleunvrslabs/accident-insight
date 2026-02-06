@@ -1,29 +1,23 @@
 import { useState } from 'react';
 import { FloatingNav } from '@/components/FloatingNav';
+import { FloatingFilters } from '@/components/FloatingFilters';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useIncidents, useIncidentStats } from '@/hooks/useIncidents';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ITALIAN_REGIONS, ACCIDENT_TYPE_LABELS } from '@/types/incident';
+import type { IncidentFilters } from '@/types/incident';
 import { 
   FileText, 
   Download, 
-  Calendar,
   FileSpreadsheet,
   FileJson,
-  Printer,
   Clock,
   CheckCircle,
   AlertCircle,
   Settings2,
   Sparkles,
-  MapPin,
-  Car,
   Users,
   BarChart3,
   ChevronRight
@@ -34,13 +28,10 @@ import { it } from 'date-fns/locale';
 type ExportFormat = 'pdf' | 'excel' | 'json';
 
 export default function Report() {
-  const { data: incidents, isLoading: incidentsLoading } = useIncidents({});
+  const [filters, setFilters] = useState<IncidentFilters>({});
+  const { data: incidents, isLoading: incidentsLoading } = useIncidents(filters);
   const { data: stats, isLoading: statsLoading } = useIncidentStats();
 
-  const [dateFrom, setDateFrom] = useState<Date | undefined>(undefined);
-  const [dateTo, setDateTo] = useState<Date | undefined>(undefined);
-  const [selectedRegion, setSelectedRegion] = useState<string>('all');
-  const [selectedType, setSelectedType] = useState<string>('all');
   const [exportFormat, setExportFormat] = useState<ExportFormat>('pdf');
   const [includeStats, setIncludeStats] = useState(true);
   const [includeCharts, setIncludeCharts] = useState(true);
@@ -107,19 +98,11 @@ export default function Report() {
       <FloatingNav />
       
       <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pt-20 sm:pt-24">
-        <div className="space-y-6">
-          {/* Header */}
-          <div className="flex items-center gap-3">
-            <div className="p-3 rounded-2xl bg-primary/10">
-              <FileText className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Report</h1>
-              <p className="text-muted-foreground text-sm">Genera report personalizzati</p>
-            </div>
-          </div>
+        <div className="space-y-4 sm:space-y-6">
+          {/* Floating Filters */}
+          <FloatingFilters filters={filters} onFiltersChange={setFilters} />
 
-          {/* Custom Report Generator - Improved */}
+          {/* Custom Report Generator */}
           <Card variant="glass" className="overflow-hidden">
             {/* Header with gradient */}
             <div className="p-5 border-b border-border/30 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
@@ -135,95 +118,6 @@ export default function Report() {
             </div>
 
             <div className="p-4 sm:p-5 space-y-5 sm:space-y-6">
-              {/* Filters Grid */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                {/* Date From */}
-                <div className="space-y-2">
-                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    Data Inizio
-                  </label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="glass" className="w-full justify-start font-normal">
-                        {dateFrom ? format(dateFrom, 'dd/MM/yyyy') : 'Seleziona data'}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <CalendarComponent
-                        mode="single"
-                        selected={dateFrom}
-                        onSelect={setDateFrom}
-                        locale={it}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-
-                {/* Date To */}
-                <div className="space-y-2">
-                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    Data Fine
-                  </label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="glass" className="w-full justify-start font-normal">
-                        {dateTo ? format(dateTo, 'dd/MM/yyyy') : 'Seleziona data'}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <CalendarComponent
-                        mode="single"
-                        selected={dateTo}
-                        onSelect={setDateTo}
-                        locale={it}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-
-                {/* Region */}
-                <div className="space-y-2">
-                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-muted-foreground" />
-                    Regione
-                  </label>
-                  <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Tutte le regioni" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">Tutte le regioni</SelectItem>
-                      {ITALIAN_REGIONS.map((region) => (
-                        <SelectItem key={region} value={region}>{region}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Accident Type */}
-                <div className="space-y-2">
-                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
-                    <Car className="h-4 w-4 text-muted-foreground" />
-                    Tipo Incidente
-                  </label>
-                  <Select value={selectedType} onValueChange={setSelectedType}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Tutti i tipi" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">Tutti i tipi</SelectItem>
-                      {Object.entries(ACCIDENT_TYPE_LABELS).map(([value, label]) => (
-                        <SelectItem key={value} value={value}>{label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
               {/* Format Selection */}
               <div className="space-y-3">
                 <label className="text-xs sm:text-sm font-medium">Formato Export</label>
