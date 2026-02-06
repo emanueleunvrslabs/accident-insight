@@ -8,28 +8,18 @@ const cardVariants = cva(
   {
     variants: {
       variant: {
-        default: "border bg-card shadow-sm",
+        default: "border border-border/50 bg-card shadow-sm",
         glass: [
-          "bg-[hsl(var(--glass-bg))]",
-          "backdrop-blur-[20px]",
-          "border border-[hsl(var(--glass-border))]",
-          "shadow-[inset_0_0.5px_0_0_hsl(var(--glass-highlight)),0_1px_3px_hsl(var(--glass-shadow)),0_4px_12px_hsl(var(--glass-shadow))]",
-          "hover:shadow-[inset_0_0.5px_0_0_hsl(var(--glass-highlight)),0_4px_12px_hsl(var(--glass-shadow)),0_12px_32px_hsl(var(--glass-shadow))]",
+          "liquid-glass",
           "hover:-translate-y-0.5",
         ].join(" "),
         "glass-subtle": [
-          "bg-[hsl(var(--glass-bg-subtle))]",
-          "backdrop-blur-[12px]",
-          "border border-[hsl(var(--glass-border-outer))]",
-          "shadow-[inset_0_0.5px_0_0_hsl(var(--glass-highlight)),0_1px_2px_hsl(var(--glass-shadow))]",
+          "glass-subtle",
         ].join(" "),
         "glass-strong": [
-          "bg-[hsl(var(--glass-bg-strong))]",
-          "backdrop-blur-[32px]",
-          "border border-[hsl(var(--glass-border))]",
-          "shadow-[inset_0_0.5px_0_0_hsl(var(--glass-highlight)),0_2px_6px_hsl(var(--glass-shadow)),0_8px_24px_hsl(var(--glass-shadow))]",
+          "glass-strong",
         ].join(" "),
-        elevated: "border bg-card shadow-liquid",
+        elevated: "border border-border/50 bg-card shadow-liquid",
       },
     },
     defaultVariants: {
