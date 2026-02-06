@@ -4,9 +4,6 @@ import { FloatingFilters } from '@/components/FloatingFilters';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-
-import { useIncidents, useIncidentStats } from '@/hooks/useIncidents';
-import { Skeleton } from '@/components/ui/skeleton';
 import type { IncidentFilters } from '@/types/incident';
 import { 
   FileText, 
@@ -23,12 +20,10 @@ type ExportFormat = 'pdf' | 'excel';
 
 export default function Report() {
   const [filters, setFilters] = useState<IncidentFilters>({});
-  const { data: incidents, isLoading: incidentsLoading } = useIncidents(filters);
-  const { data: stats, isLoading: statsLoading } = useIncidentStats();
 
   const [exportFormat, setExportFormat] = useState<ExportFormat>('pdf');
 
-  const isLoading = incidentsLoading || statsLoading;
+  
 
   const recentReports = [
     {
@@ -57,28 +52,6 @@ export default function Report() {
     }
   ];
 
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-mesh">
-        <FloatingNav />
-        <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pt-20 sm:pt-24">
-          <div className="space-y-6">
-            <Skeleton className="h-10 w-64" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[...Array(4)].map((_, i) => (
-                <Card key={i} variant="glass" className="p-6">
-                  <Skeleton className="h-6 w-32 mb-4" />
-                  <Skeleton className="h-16 w-full" />
-                </Card>
-              ))}
-            </div>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gradient-mesh">
       <FloatingNav />
@@ -95,31 +68,6 @@ export default function Report() {
             onGenerate={() => console.log('Generate', exportFormat)}
           />
 
-          {/* Preview Summary */}
-          <Card variant="glass" className="p-4 sm:p-5">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium">Anteprima dati da esportare</span>
-              <Badge variant="glass-primary" size="sm">{incidents?.length || 0} record</Badge>
-            </div>
-            <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
-              <div className="p-3 rounded-xl bg-muted/10 border border-border/20">
-                <div className="text-xl sm:text-2xl font-bold">{stats?.totalIncidents || 0}</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground uppercase mt-1">Incidenti</div>
-              </div>
-              <div className="p-3 rounded-xl bg-muted/10 border border-border/20">
-                <div className="text-xl sm:text-2xl font-bold text-destructive">{stats?.totalDeceased || 0}</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground uppercase mt-1">Vittime</div>
-              </div>
-              <div className="p-3 rounded-xl bg-muted/10 border border-border/20">
-                <div className="text-xl sm:text-2xl font-bold">{Object.keys(stats?.byRegion || {}).length}</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground uppercase mt-1">Regioni</div>
-              </div>
-              <div className="p-3 rounded-xl bg-muted/10 border border-border/20">
-                <div className="text-xl sm:text-2xl font-bold">{Object.keys(stats?.byType || {}).length}</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground uppercase mt-1">Tipi</div>
-              </div>
-            </div>
-          </Card>
 
           {/* Recent Reports */}
           <Card variant="glass" className="p-5">
