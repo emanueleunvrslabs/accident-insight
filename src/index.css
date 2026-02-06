@@ -65,59 +65,60 @@
   }
 
   .dark {
-    --background: 220 20% 8%;
-    --foreground: 210 15% 93%;
+    /* Lighter teal-blue background like examples */
+    --background: 195 35% 12%;
+    --foreground: 180 15% 93%;
 
-    --card: 220 18% 12%;
-    --card-foreground: 210 15% 93%;
+    --card: 195 30% 15%;
+    --card-foreground: 180 15% 93%;
 
-    --popover: 220 18% 12%;
-    --popover-foreground: 210 15% 93%;
+    --popover: 195 30% 14%;
+    --popover-foreground: 180 15% 93%;
 
-    --primary: 210 30% 55%;
-    --primary-foreground: 220 20% 8%;
+    --primary: 170 45% 45%;
+    --primary-foreground: 195 35% 8%;
 
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 210 15% 88%;
+    --secondary: 195 25% 20%;
+    --secondary-foreground: 180 15% 88%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 215 12% 55%;
+    --muted: 195 25% 18%;
+    --muted-foreground: 190 15% 55%;
 
-    --accent: 200 20% 50%;
-    --accent-foreground: 220 20% 8%;
+    --accent: 170 35% 50%;
+    --accent-foreground: 195 35% 8%;
 
     --destructive: 0 55% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 152 40% 42%;
+    --success: 152 45% 45%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 35 60% 48%;
-    --warning-foreground: 220 20% 8%;
+    --warning: 40 70% 50%;
+    --warning-foreground: 195 35% 8%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 18%;
-    --ring: 210 30% 55%;
+    --border: 195 20% 22%;
+    --input: 195 25% 20%;
+    --ring: 170 45% 45%;
 
-    /* Liquid Glass - Dark mode */
-    --glass-bg: 220 20% 12% / 0.7;
-    --glass-bg-strong: 220 20% 10% / 0.85;
-    --glass-bg-subtle: 220 20% 15% / 0.5;
-    --glass-border: 220 15% 25% / 0.5;
-    --glass-border-outer: 220 15% 30% / 0.3;
+    /* Liquid Glass - Dark mode with teal tints */
+    --glass-bg: 195 30% 14% / 0.75;
+    --glass-bg-strong: 195 30% 12% / 0.88;
+    --glass-bg-subtle: 195 25% 18% / 0.55;
+    --glass-border: 170 20% 30% / 0.45;
+    --glass-border-outer: 170 20% 35% / 0.25;
     --glass-blur: 24px;
     --glass-blur-strong: 40px;
-    --glass-highlight: 0 0% 100% / 0.08;
-    --glass-shadow: 0 0% 0% / 0.4;
+    --glass-highlight: 170 50% 70% / 0.1;
+    --glass-shadow: 195 50% 5% / 0.5;
 
-    --sidebar-background: 220 20% 6%;
-    --sidebar-foreground: 210 15% 88%;
-    --sidebar-primary: 210 30% 55%;
-    --sidebar-primary-foreground: 220 20% 8%;
-    --sidebar-accent: 220 15% 15%;
-    --sidebar-accent-foreground: 210 15% 88%;
-    --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 210 30% 55%;
+    --sidebar-background: 195 35% 10%;
+    --sidebar-foreground: 180 15% 88%;
+    --sidebar-primary: 170 45% 45%;
+    --sidebar-primary-foreground: 195 35% 8%;
+    --sidebar-accent: 195 25% 18%;
+    --sidebar-accent-foreground: 180 15% 88%;
+    --sidebar-border: 195 20% 20%;
+    --sidebar-ring: 170 45% 45%;
   }
 }
 
