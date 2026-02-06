@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Car, Menu, X, LayoutDashboard, AlertTriangle, BarChart3, FileText, Rss, Plus } from 'lucide-react';
+import { Car, Menu, X, LayoutDashboard, AlertTriangle, BarChart3, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { ManageFeedsDialog } from './feeds/ManageFeedsDialog';
-import { AddArticleDialog } from './incidents/AddArticleDialog';
+import { AddMenu } from './AddMenu';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
@@ -65,8 +64,7 @@ export function FloatingNav() {
 
           {/* Actions */}
           <div className="flex items-center gap-1.5 pl-2 border-l border-border/30">
-            <ManageFeedsDialog />
-            <AddArticleDialog />
+            <AddMenu />
           </div>
         </nav>
       </div>
@@ -88,7 +86,7 @@ export function FloatingNav() {
           </Link>
 
           <div className="flex items-center gap-2">
-            <AddArticleDialog />
+            <AddMenu />
             <Button
               variant="ghost"
               size="icon"
@@ -132,11 +130,6 @@ export function FloatingNav() {
 
             {/* Divider */}
             <div className="h-px bg-border/30 my-3" />
-
-            {/* Actions */}
-            <div className="flex flex-col gap-2">
-              <ManageFeedsDialog />
-            </div>
           </div>
         </div>
       </div>

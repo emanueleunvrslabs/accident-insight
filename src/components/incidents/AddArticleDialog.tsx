@@ -16,8 +16,16 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { useProcessArticle } from '@/hooks/useIncidents';
 
-export function AddArticleDialog() {
-  const [open, setOpen] = useState(false);
+interface AddArticleDialogProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export function AddArticleDialog({ open: controlledOpen, onOpenChange }: AddArticleDialogProps = {}) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setOpen = onOpenChange !== undefined ? onOpenChange : setInternalOpen;
+  
   const [url, setUrl] = useState('');
   const [title, setTitle] = useState('');
   const [snippet, setSnippet] = useState('');
@@ -76,15 +84,6 @@ export function AddArticleDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button 
-          size="sm" 
-          className="gap-2 px-3 h-9 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-glow"
-        >
-          <Plus className="h-4 w-4" />
-          <span className="hidden sm:inline">Aggiungi</span>
-        </Button>
-      </DialogTrigger>
       <DialogContent className="w-[calc(100vw-2rem)] max-w-[500px] rounded-2xl glass border-0 mx-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
