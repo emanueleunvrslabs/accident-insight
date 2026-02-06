@@ -64,8 +64,8 @@ export function StatsCards() {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
-        {[...Array(6)].map((_, i) => (
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        {[...Array(4)].map((_, i) => (
           <Card key={i} variant="glass" className="p-4 sm:p-5">
             <Skeleton className="h-4 w-20 mb-3" />
             <Skeleton className="h-8 w-16 mb-2" />
@@ -100,24 +100,6 @@ export function StatsCards() {
       valueColor: "text-destructive",
     },
     {
-      title: "Totale Incidenti",
-      value: stats.totalIncidents,
-      subtitle: "Casi monitorati",
-      icon: AlertTriangle,
-      tintClass: "bg-primary/8 dark:bg-primary/12",
-      iconBg: "bg-primary/15",
-      iconColor: "text-primary",
-    },
-    {
-      title: "Vittime Totali",
-      value: stats.totalDeceased,
-      subtitle: "Decessi registrati",
-      icon: Users,
-      tintClass: "bg-warning/8 dark:bg-warning/12",
-      iconBg: "bg-warning/15",
-      iconColor: "text-warning",
-    },
-    {
       title: "Regione Top",
       value: stats.topRegion?.[0] || '-',
       subtitle: stats.topRegion ? `${stats.topRegion[1]} incidenti` : 'Nessun dato',
@@ -138,7 +120,7 @@ export function StatsCards() {
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       {cards.map((card, index) => (
         <Card
           key={card.title}
