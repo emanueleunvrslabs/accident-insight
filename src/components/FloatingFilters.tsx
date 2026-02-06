@@ -1,22 +1,28 @@
 import { useState } from 'react';
-import { Calendar, ChevronDown, X, SlidersHorizontal } from 'lucide-react';
+import { Calendar, ChevronDown, X, SlidersHorizontal, FileText, FileSpreadsheet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import { Badge } from '@/components/ui/badge';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
 import type { IncidentFilters, AccidentType } from '@/types/incident';
 import { ITALIAN_REGIONS, ACCIDENT_TYPE_LABELS } from '@/types/incident';
 
+type ExportFormat = 'pdf' | 'excel';
+
 interface FloatingFiltersProps {
   filters: IncidentFilters;
   onFiltersChange: (filters: IncidentFilters) => void;
+  showFormatSelector?: boolean;
+  exportFormat?: ExportFormat;
+  onExportFormatChange?: (format: ExportFormat) => void;
 }
 
-export function FloatingFilters({ filters, onFiltersChange }: FloatingFiltersProps) {
+export function FloatingFilters({ filters, onFiltersChange, showFormatSelector, exportFormat, onExportFormatChange }: FloatingFiltersProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [dateFrom, setDateFrom] = useState<Date | undefined>(
     filters.dateFrom ? new Date(filters.dateFrom) : undefined
@@ -177,6 +183,40 @@ export function FloatingFilters({ filters, onFiltersChange }: FloatingFiltersPro
               </Button>
             </>
           )}
+
+          {/* Format selector for Report page */}
+          {showFormatSelector && (
+            <>
+              <div className="h-5 w-px bg-border/30" />
+              <ToggleGroup 
+                type="single" 
+                value={exportFormat} 
+                onValueChange={(value) => value && onExportFormatChange?.(value as ExportFormat)}
+                className="gap-0.5"
+              >
+                <ToggleGroupItem 
+                  value="pdf" 
+                  className={cn(
+                    "h-8 px-3 rounded-full text-xs gap-1.5",
+                    exportFormat === 'pdf' ? "bg-destructive/10 text-destructive" : "bg-muted/30"
+                  )}
+                >
+                  <FileText className="h-3.5 w-3.5" />
+                  PDF
+                </ToggleGroupItem>
+                <ToggleGroupItem 
+                  value="excel" 
+                  className={cn(
+                    "h-8 px-3 rounded-full text-xs gap-1.5",
+                    exportFormat === 'excel' ? "bg-success/10 text-success" : "bg-muted/30"
+                  )}
+                >
+                  <FileSpreadsheet className="h-3.5 w-3.5" />
+                  Excel
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </>
+          )}
         </nav>
       </div>
 
@@ -298,6 +338,39 @@ export function FloatingFilters({ filters, onFiltersChange }: FloatingFiltersPro
                   </PopoverContent>
                 </Popover>
               </div>
+
+              {/* Format selector for Report page - Mobile */}
+              {showFormatSelector && (
+                <div className="space-y-2">
+                  <label className="text-xs font-medium text-muted-foreground">Formato Export</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => onExportFormatChange?.('pdf')}
+                      className={cn(
+                        "flex items-center justify-center gap-2 h-10 rounded-xl transition-all",
+                        exportFormat === 'pdf' 
+                          ? "bg-destructive/10 text-destructive border-2 border-destructive/30" 
+                          : "bg-muted/30 border-2 border-transparent"
+                      )}
+                    >
+                      <FileText className="h-4 w-4" />
+                      <span className="text-sm font-medium">PDF</span>
+                    </button>
+                    <button
+                      onClick={() => onExportFormatChange?.('excel')}
+                      className={cn(
+                        "flex items-center justify-center gap-2 h-10 rounded-xl transition-all",
+                        exportFormat === 'excel' 
+                          ? "bg-success/10 text-success border-2 border-success/30" 
+                          : "bg-muted/30 border-2 border-transparent"
+                      )}
+                    >
+                      <FileSpreadsheet className="h-4 w-4" />
+                      <span className="text-sm font-medium">Excel</span>
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* Clear filters */}
               {activeFiltersCount > 0 && (
