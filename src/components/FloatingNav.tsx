@@ -1,6 +1,5 @@
 import { Car } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { ThemeToggle } from './ThemeToggle';
 import { ManageFeedsDialog } from './feeds/ManageFeedsDialog';
 import { AddArticleDialog } from './incidents/AddArticleDialog';
 import { cn } from '@/lib/utils';
@@ -61,7 +60,6 @@ export function FloatingNav() {
 
         {/* Actions */}
         <div className="flex items-center gap-1.5 pl-2 border-l border-border/30">
-          <ThemeToggle />
           <ManageFeedsDialog />
           <AddArticleDialog />
         </div>
