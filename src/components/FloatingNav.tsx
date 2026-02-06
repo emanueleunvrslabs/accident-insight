@@ -1,4 +1,5 @@
 import { Car } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 import { ManageFeedsDialog } from './feeds/ManageFeedsDialog';
 import { AddArticleDialog } from './incidents/AddArticleDialog';
@@ -7,17 +8,18 @@ import { cn } from '@/lib/utils';
 interface NavItem {
   label: string;
   href: string;
-  active?: boolean;
 }
 
 const navItems: NavItem[] = [
-  { label: 'Dashboard', href: '#', active: true },
-  { label: 'Incidenti', href: '#' },
-  { label: 'Statistiche', href: '#' },
-  { label: 'Report', href: '#' },
+  { label: 'Dashboard', href: '/' },
+  { label: 'Incidenti', href: '/incidenti' },
+  { label: 'Statistiche', href: '/statistiche' },
+  { label: 'Report', href: '/report' },
 ];
 
 export function FloatingNav() {
+  const location = useLocation();
+
   return (
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 w-full max-w-fit">
       <nav className={cn(
@@ -29,29 +31,32 @@ export function FloatingNav() {
         "shadow-[inset_0_0.5px_0_0_hsl(var(--glass-highlight)),0_2px_6px_hsl(var(--glass-shadow)),0_8px_24px_hsl(var(--glass-shadow))]",
       )}>
         {/* Logo */}
-        <div className="flex items-center gap-2.5 px-4 pr-5 border-r border-border/30">
+        <Link to="/" className="flex items-center gap-2.5 px-4 pr-5 border-r border-border/30 hover:opacity-80 transition-opacity">
           <div className="p-2 rounded-xl bg-primary shadow-sm">
             <Car className="h-4 w-4 text-primary-foreground" />
           </div>
           <span className="font-semibold text-sm text-foreground hidden sm:block">Angelini</span>
-        </div>
+        </Link>
 
         {/* Nav Items */}
         <div className="flex items-center gap-0.5 px-1.5">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={cn(
-                "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
-                item.active
-                  ? "bg-primary/10 text-primary dark:bg-primary/20 shadow-sm"
-                  : "text-muted-foreground hover:text-foreground hover:bg-foreground/5 active:scale-95"
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.href;
+            return (
+              <Link
+                key={item.label}
+                to={item.href}
+                className={cn(
+                  "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                  isActive
+                    ? "bg-primary/10 text-primary dark:bg-primary/20 shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-foreground/5 active:scale-95"
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Actions */}
