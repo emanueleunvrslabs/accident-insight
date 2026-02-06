@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Menu, X, LayoutDashboard, AlertTriangle, BarChart3, FileText } from 'lucide-react';
+import { Search, Menu, X, AlertTriangle, BarChart3, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { AddMenu } from './AddMenu';
 import { cn } from '@/lib/utils';
@@ -10,12 +10,11 @@ import { useSearch } from '@/contexts/SearchContext';
 interface NavItem {
   label: string;
   href: string;
-  icon: typeof LayoutDashboard;
+  icon: typeof AlertTriangle;
 }
 
 const navItems: NavItem[] = [
-  { label: 'Dashboard', href: '/', icon: LayoutDashboard },
-  { label: 'Incidenti', href: '/incidenti', icon: AlertTriangle },
+  { label: 'Incidenti', href: '/', icon: AlertTriangle },
   { label: 'Statistiche', href: '/statistiche', icon: BarChart3 },
   { label: 'Report', href: '/report', icon: FileText },
 ];
