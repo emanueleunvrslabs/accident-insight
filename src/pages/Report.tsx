@@ -14,9 +14,7 @@ import {
   FileSpreadsheet,
   Clock,
   CheckCircle,
-  AlertCircle,
-  Settings2,
-  BarChart3
+  AlertCircle
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
@@ -97,49 +95,29 @@ export default function Report() {
             onGenerate={() => console.log('Generate', exportFormat)}
           />
 
-          {/* Custom Report Generator */}
-          <Card variant="glass" className="overflow-hidden">
-            {/* Header with gradient */}
-            <div className="p-5 border-b border-border/30 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-primary/10">
-                  <Settings2 className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Report Personalizzato</h3>
-                  <p className="text-sm text-muted-foreground">Configura i parametri per generare un report su misura</p>
-                </div>
-              </div>
+          {/* Preview Summary */}
+          <Card variant="glass" className="p-4 sm:p-5">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-medium">Anteprima dati da esportare</span>
+              <Badge variant="glass-primary" size="sm">{incidents?.length || 0} record</Badge>
             </div>
-
-            <div className="p-4 sm:p-5 space-y-5 sm:space-y-6">
-
-              {/* Preview Summary */}
-              <div className="p-3 sm:p-4 rounded-xl bg-muted/10 border border-border/20">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs sm:text-sm font-medium">Anteprima</span>
-                  <Badge variant="glass-primary" size="sm">{incidents?.length || 0} record</Badge>
-                </div>
-                <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
-                  <div className="p-2 rounded-lg bg-background/50">
-                    <div className="text-base sm:text-lg font-bold">{stats?.totalIncidents || 0}</div>
-                    <div className="text-[8px] sm:text-[10px] text-muted-foreground uppercase">Incidenti</div>
-                  </div>
-                  <div className="p-2 rounded-lg bg-background/50">
-                    <div className="text-base sm:text-lg font-bold text-destructive">{stats?.totalDeceased || 0}</div>
-                    <div className="text-[8px] sm:text-[10px] text-muted-foreground uppercase">Vittime</div>
-                  </div>
-                  <div className="p-2 rounded-lg bg-background/50">
-                    <div className="text-base sm:text-lg font-bold">{Object.keys(stats?.byRegion || {}).length}</div>
-                    <div className="text-[8px] sm:text-[10px] text-muted-foreground uppercase">Regioni</div>
-                  </div>
-                  <div className="p-2 rounded-lg bg-background/50">
-                    <div className="text-base sm:text-lg font-bold">{Object.keys(stats?.byType || {}).length}</div>
-                    <div className="text-[8px] sm:text-[10px] text-muted-foreground uppercase">Tipi</div>
-                  </div>
-                </div>
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
+              <div className="p-3 rounded-xl bg-muted/10 border border-border/20">
+                <div className="text-xl sm:text-2xl font-bold">{stats?.totalIncidents || 0}</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground uppercase mt-1">Incidenti</div>
               </div>
-
+              <div className="p-3 rounded-xl bg-muted/10 border border-border/20">
+                <div className="text-xl sm:text-2xl font-bold text-destructive">{stats?.totalDeceased || 0}</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground uppercase mt-1">Vittime</div>
+              </div>
+              <div className="p-3 rounded-xl bg-muted/10 border border-border/20">
+                <div className="text-xl sm:text-2xl font-bold">{Object.keys(stats?.byRegion || {}).length}</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground uppercase mt-1">Regioni</div>
+              </div>
+              <div className="p-3 rounded-xl bg-muted/10 border border-border/20">
+                <div className="text-xl sm:text-2xl font-bold">{Object.keys(stats?.byType || {}).length}</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground uppercase mt-1">Tipi</div>
+              </div>
             </div>
           </Card>
 
