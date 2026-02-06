@@ -64,7 +64,7 @@ export function FloatingFilters({ filters, onFiltersChange }: FloatingFiltersPro
   return (
     <>
       {/* Desktop Floating Filters */}
-      <div className="hidden md:block fixed top-[72px] left-1/2 -translate-x-1/2 z-40 px-4 w-full max-w-fit">
+      <div className="hidden md:block fixed top-[80px] left-1/2 -translate-x-1/2 z-40 px-4 w-full max-w-fit">
         <nav className={cn(
           "flex items-center gap-1 px-3 py-2 rounded-full",
           "bg-[hsl(var(--glass-bg-strong))]",
