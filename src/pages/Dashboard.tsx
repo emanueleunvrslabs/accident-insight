@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { Shield, BarChart3 } from 'lucide-react';
+import { Shield, BarChart3, Calendar } from 'lucide-react';
 import { StatsCards } from '@/components/dashboard/StatsCards';
-import { IncidentFiltersBar } from '@/components/incidents/IncidentFilters';
 import { IncidentList } from '@/components/incidents/IncidentList';
 import { IncidentDetail } from '@/components/incidents/IncidentDetail';
 import { FloatingNav } from '@/components/FloatingNav';
-import { Card } from '@/components/ui/card';
-import type { IncidentFilters } from '@/types/incident';
+import { format } from 'date-fns';
+import { it } from 'date-fns/locale';
 
 export default function Dashboard() {
-  const [filters, setFilters] = useState<IncidentFilters>({});
   const [selectedIncidentId, setSelectedIncidentId] = useState<string | null>(null);
+  
+  // Filter for today's incidents only
+  const today = format(new Date(), 'yyyy-MM-dd');
+  const todayFilters = { dateFrom: today, dateTo: today };
 
   return (
     <div className="min-h-screen bg-gradient-mesh">
@@ -29,14 +31,22 @@ export default function Dashboard() {
             {/* Stats */}
             <StatsCards />
 
-            {/* Filters - Glass container */}
-            <Card variant="glass-subtle" className="p-3 sm:p-4">
-              <IncidentFiltersBar filters={filters} onFiltersChange={setFilters} />
-            </Card>
+            {/* Today's Incidents Header */}
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-accent/10">
+                <Calendar className="h-5 w-5 text-accent" />
+              </div>
+              <div>
+                <h2 className="text-lg sm:text-xl font-semibold">Incidenti di Oggi</h2>
+                <p className="text-sm text-muted-foreground">
+                  {format(new Date(), "EEEE d MMMM yyyy", { locale: it })}
+                </p>
+              </div>
+            </div>
 
-            {/* Incident list */}
+            {/* Incident list - only today's */}
             <IncidentList
-              filters={filters}
+              filters={todayFilters}
               onViewDetails={(id) => setSelectedIncidentId(id)}
             />
           </div>
