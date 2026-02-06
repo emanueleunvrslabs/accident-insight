@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FloatingNav } from '@/components/FloatingNav';
 import { Card } from '@/components/ui/card';
 import { IncidentFiltersBar } from '@/components/incidents/IncidentFilters';
 import { IncidentList } from '@/components/incidents/IncidentList';
 import { IncidentDetail } from '@/components/incidents/IncidentDetail';
 import { AlertTriangle } from 'lucide-react';
+import { useSearch } from '@/contexts/SearchContext';
 import type { IncidentFilters } from '@/types/incident';
 
 export default function Incidenti() {
+  const { searchQuery } = useSearch();
   const [filters, setFilters] = useState<IncidentFilters>({});
   const [selectedIncidentId, setSelectedIncidentId] = useState<string | null>(null);
+
+  // Sync search query from global context
+  useEffect(() => {
+    setFilters(prev => ({ ...prev, searchQuery: searchQuery || undefined }));
+  }, [searchQuery]);
 
   return (
     <div className="min-h-screen bg-gradient-mesh">

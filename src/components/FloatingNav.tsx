@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Car, Menu, X, LayoutDashboard, AlertTriangle, BarChart3, FileText } from 'lucide-react';
+import { Search, Menu, X, LayoutDashboard, AlertTriangle, BarChart3, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { AddMenu } from './AddMenu';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useSearch } from '@/contexts/SearchContext';
 
 interface NavItem {
   label: string;
@@ -21,6 +23,7 @@ const navItems: NavItem[] = [
 export function FloatingNav() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { searchQuery, setSearchQuery } = useSearch();
 
   return (
     <>
@@ -33,13 +36,17 @@ export function FloatingNav() {
           "border border-[hsl(var(--glass-border))]",
           "shadow-[inset_0_0.5px_0_0_hsl(var(--glass-highlight)),0_2px_6px_hsl(var(--glass-shadow)),0_8px_24px_hsl(var(--glass-shadow))]",
         )}>
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 px-4 pr-5 border-r border-border/30 hover:opacity-80 transition-opacity">
-            <div className="p-2 rounded-xl bg-primary shadow-sm">
-              <Car className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="font-semibold text-sm text-foreground">Angelini</span>
-          </Link>
+          {/* Search */}
+          <div className="relative flex items-center px-3 border-r border-border/30">
+            <Search className="absolute left-6 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <Input
+              type="text"
+              placeholder="Cerca..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-40 h-8 pl-8 pr-3 rounded-full bg-muted/30 border-0 text-sm placeholder:text-muted-foreground/60 focus-visible:ring-1 focus-visible:ring-primary/50"
+            />
+          </div>
 
           {/* Nav Items */}
           <div className="flex items-center gap-0.5 px-1.5">
@@ -78,12 +85,17 @@ export function FloatingNav() {
           "backdrop-blur-[32px] saturate-[200%]",
           "border-b border-[hsl(var(--glass-border))]",
         )}>
-          <Link to="/" className="flex items-center gap-2.5" onClick={() => setIsOpen(false)}>
-            <div className="p-2 rounded-xl bg-primary shadow-sm">
-              <Car className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="font-semibold text-sm text-foreground">Angelini</span>
-          </Link>
+          {/* Search */}
+          <div className="relative flex-1 max-w-[180px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <Input
+              type="text"
+              placeholder="Cerca..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full h-9 pl-9 pr-3 rounded-xl bg-muted/30 border-0 text-sm placeholder:text-muted-foreground/60 focus-visible:ring-1 focus-visible:ring-primary/50"
+            />
+          </div>
 
           <div className="flex items-center gap-2">
             <AddMenu />
