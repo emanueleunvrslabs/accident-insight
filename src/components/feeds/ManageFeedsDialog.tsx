@@ -25,8 +25,16 @@ import { useNewsFeeds, useAddNewsFeed, useToggleNewsFeed, useDeleteNewsFeed } fr
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
 
-export function ManageFeedsDialog() {
-  const [open, setOpen] = useState(false);
+interface ManageFeedsDialogProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export function ManageFeedsDialog({ open: controlledOpen, onOpenChange }: ManageFeedsDialogProps = {}) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setOpen = onOpenChange !== undefined ? onOpenChange : setInternalOpen;
+  
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
   const [feedType, setFeedType] = useState('web');
@@ -103,16 +111,6 @@ export function ManageFeedsDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          className="gap-2 px-3 h-9 rounded-xl bg-muted/50 hover:bg-muted/80 w-full md:w-auto justify-start md:justify-center"
-        >
-          <Rss className="h-4 w-4" />
-          <span>Gestisci Fonti</span>
-        </Button>
-      </DialogTrigger>
       <DialogContent className="w-[calc(100vw-2rem)] max-w-[600px] max-h-[85vh] rounded-2xl glass border-0 mx-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
