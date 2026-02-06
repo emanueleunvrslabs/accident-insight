@@ -5,6 +5,7 @@ import { IncidentFiltersBar } from '@/components/incidents/IncidentFilters';
 import { IncidentList } from '@/components/incidents/IncidentList';
 import { IncidentDetail } from '@/components/incidents/IncidentDetail';
 import { FloatingNav } from '@/components/FloatingNav';
+import { Card } from '@/components/ui/card';
 import type { IncidentFilters } from '@/types/incident';
 
 export default function Dashboard() {
@@ -28,10 +29,10 @@ export default function Dashboard() {
             {/* Stats */}
             <StatsCards />
 
-            {/* Filters */}
-            <div className="glass rounded-2xl p-3 sm:p-4 shadow-liquid animate-slide-up">
+            {/* Filters - Glass container */}
+            <Card variant="glass-subtle" className="p-3 sm:p-4">
               <IncidentFiltersBar filters={filters} onFiltersChange={setFilters} />
-            </div>
+            </Card>
 
             {/* Incident list */}
             <IncidentList
