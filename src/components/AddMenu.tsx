@@ -26,24 +26,28 @@ export function AddMenu() {
             <span className="hidden sm:inline">Aggiungi</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-48 rounded-xl">
+        <DropdownMenuContent align="end" className="w-52 rounded-xl bg-popover border border-border shadow-lg z-50">
           <DropdownMenuItem 
             onClick={() => setArticleOpen(true)}
-            className="gap-3 py-3 cursor-pointer rounded-lg"
+            className="gap-3 py-3 cursor-pointer rounded-lg focus:bg-accent"
           >
-            <FileText className="h-4 w-4 text-primary" />
+            <div className="p-2 rounded-lg bg-primary/10">
+              <FileText className="h-4 w-4 text-primary" />
+            </div>
             <div>
-              <div className="font-medium">Articolo</div>
+              <div className="font-medium text-foreground">Articolo</div>
               <div className="text-xs text-muted-foreground">Aggiungi un nuovo articolo</div>
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem 
             onClick={() => setFeedsOpen(true)}
-            className="gap-3 py-3 cursor-pointer rounded-lg"
+            className="gap-3 py-3 cursor-pointer rounded-lg focus:bg-accent"
           >
-            <Rss className="h-4 w-4 text-accent" />
+            <div className="p-2 rounded-lg bg-accent/10">
+              <Rss className="h-4 w-4 text-accent" />
+            </div>
             <div>
-              <div className="font-medium">Fonte</div>
+              <div className="font-medium text-foreground">Fonte</div>
               <div className="text-xs text-muted-foreground">Gestisci le fonti RSS</div>
             </div>
           </DropdownMenuItem>
