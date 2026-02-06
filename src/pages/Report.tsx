@@ -12,7 +12,6 @@ import {
   FileText, 
   Download, 
   FileSpreadsheet,
-  FileJson,
   Clock,
   CheckCircle,
   AlertCircle,
@@ -25,7 +24,7 @@ import {
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
 
-type ExportFormat = 'pdf' | 'excel' | 'json';
+type ExportFormat = 'pdf' | 'excel';
 
 export default function Report() {
   const [filters, setFilters] = useState<IncidentFilters>({});
@@ -69,7 +68,6 @@ export default function Report() {
   const formatOptions = [
     { value: 'pdf', label: 'PDF', icon: FileText, color: 'text-destructive', bg: 'bg-destructive/10' },
     { value: 'excel', label: 'Excel', icon: FileSpreadsheet, color: 'text-success', bg: 'bg-success/10' },
-    { value: 'json', label: 'JSON', icon: FileJson, color: 'text-warning', bg: 'bg-warning/10' },
   ];
 
   if (isLoading) {
@@ -99,8 +97,14 @@ export default function Report() {
       
       <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pt-20 sm:pt-24">
         <div className="space-y-4 sm:space-y-6">
-          {/* Floating Filters */}
-          <FloatingFilters filters={filters} onFiltersChange={setFilters} />
+          {/* Floating Filters with Format Selector */}
+          <FloatingFilters 
+            filters={filters} 
+            onFiltersChange={setFilters}
+            showFormatSelector
+            exportFormat={exportFormat}
+            onExportFormatChange={setExportFormat}
+          />
 
           {/* Custom Report Generator */}
           <Card variant="glass" className="overflow-hidden">
@@ -118,28 +122,6 @@ export default function Report() {
             </div>
 
             <div className="p-4 sm:p-5 space-y-5 sm:space-y-6">
-              {/* Format Selection */}
-              <div className="space-y-3">
-                <label className="text-xs sm:text-sm font-medium">Formato Export</label>
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  {formatOptions.map((option) => (
-                    <button
-                      key={option.value}
-                      onClick={() => setExportFormat(option.value as ExportFormat)}
-                      className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-1.5 sm:gap-2 ${
-                        exportFormat === option.value
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border/30 hover:border-border/60 hover:bg-muted/10'
-                      }`}
-                    >
-                      <div className={`p-2 sm:p-2.5 rounded-lg ${option.bg}`}>
-                        <option.icon className={`h-4 w-4 sm:h-5 sm:w-5 ${option.color}`} />
-                      </div>
-                      <span className="font-medium text-xs sm:text-sm">{option.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               {/* Content Options */}
               <div className="space-y-3">
