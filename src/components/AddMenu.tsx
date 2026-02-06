@@ -20,7 +20,7 @@ export function AddMenu() {
         <DropdownMenuTrigger asChild>
           <Button 
             size="sm" 
-            className="gap-2 px-3 h-9 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-glow"
+            className="gap-2 px-4 h-9 rounded-full bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-glow"
           >
             <Plus className="h-4 w-4" />
             <span className="hidden sm:inline">Aggiungi</span>
