@@ -19,10 +19,10 @@ const PopoverContent = React.forwardRef<
       className={cn(
         "z-50 w-72 rounded-xl p-4 text-popover-foreground outline-none",
         // Liquid Glass styling
-        "bg-[hsl(var(--glass-bg-strong))]",
-        "backdrop-blur-[32px]",
-        "border border-[hsl(var(--glass-border))]",
-        "shadow-[inset_0_0.5px_0_0_hsl(var(--glass-highlight)),0_4px_16px_hsl(var(--glass-shadow)),0_16px_48px_hsl(var(--glass-shadow))]",
+        "bg-[linear-gradient(135deg,hsl(0_0%_100%/0.12)_0%,hsl(0_0%_100%/0.06)_50%,hsl(0_0%_100%/0.03)_100%)]",
+        "backdrop-blur-[40px] saturate-[180%]",
+        "border border-white/[0.18]",
+        "shadow-[0_8px_32px_hsl(0_0%_0%/0.12),inset_0_1px_0_0_hsl(0_0%_100%/0.15)]",
         // Animations
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
