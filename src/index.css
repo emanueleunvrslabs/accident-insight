@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    /* Bandizzo Theme - Slate blue like reference */
-    --background: 210 40% 22%;
+    /* Bandizzo Theme - Lighter slate blue */
+    --background: 208 35% 28%;
     --foreground: 0 0% 98%;
 
     --card: 220 25% 14%;
@@ -75,8 +75,8 @@
   }
 
   .dark {
-    /* Same as root - slate blue like Bandizzo */
-    --background: 210 40% 22%;
+    /* Same as root - lighter slate blue */
+    --background: 208 35% 28%;
     --foreground: 0 0% 98%;
     --card: 220 25% 12%;
     --card-foreground: 0 0% 98%;
