@@ -28,13 +28,16 @@ export function FloatingNav() {
     <>
       {/* Desktop Navigation */}
       <div className="hidden md:block fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 w-full max-w-fit">
-        <nav className={cn(
-          "flex items-center gap-1 px-2.5 py-2.5 rounded-full",
-          "bg-[hsl(var(--glass-bg-strong))]",
-          "backdrop-blur-[32px] saturate-[200%]",
-          "border border-[hsl(var(--glass-border))]",
-          "shadow-[inset_0_0.5px_0_0_hsl(var(--glass-highlight)),0_2px_6px_hsl(var(--glass-shadow)),0_8px_24px_hsl(var(--glass-shadow))]",
-        )}>
+        <nav 
+          className="flex items-center gap-1 px-2.5 py-2.5 rounded-full"
+          style={{
+            background: 'linear-gradient(135deg, hsl(0 0% 100% / 0.08) 0%, hsl(0 0% 100% / 0.04) 100%)',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+            border: '1px solid hsl(0 0% 100% / 0.12)',
+            boxShadow: '0 8px 32px hsl(220 30% 5% / 0.3), inset 0 1px 0 0 hsl(0 0% 100% / 0.1)'
+          }}
+        >
           {/* Search */}
           <div className="relative flex items-center px-3 border-r border-border/30">
             <Search className="absolute left-6 h-4 w-4 text-muted-foreground pointer-events-none" />
@@ -78,12 +81,15 @@ export function FloatingNav() {
       {/* Mobile Navigation */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-50">
         {/* Mobile Header Bar */}
-        <div className={cn(
-          "flex items-center justify-between px-4 py-3",
-          "bg-[hsl(var(--glass-bg-strong))]",
-          "backdrop-blur-[32px] saturate-[200%]",
-          "border-b border-[hsl(var(--glass-border))]",
-        )}>
+        <div 
+          className="flex items-center justify-between px-4 py-3"
+          style={{
+            background: 'linear-gradient(135deg, hsl(0 0% 100% / 0.06) 0%, hsl(0 0% 100% / 0.03) 100%)',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+            borderBottom: '1px solid hsl(0 0% 100% / 0.1)'
+          }}
+        >
           {/* Search */}
           <div className="relative flex-1 max-w-[180px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
@@ -110,13 +116,18 @@ export function FloatingNav() {
         </div>
 
         {/* Mobile Menu Dropdown */}
-        <div className={cn(
-          "absolute top-full left-0 right-0 overflow-hidden transition-all duration-300 ease-out",
-          "bg-[hsl(var(--glass-bg-strong))]",
-          "backdrop-blur-[32px] saturate-[200%]",
-          "border-b border-[hsl(var(--glass-border))]",
-          isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
-        )}>
+        <div 
+          className={cn(
+            "absolute top-full left-0 right-0 overflow-hidden transition-all duration-300 ease-out",
+            isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+          )}
+          style={{
+            background: 'linear-gradient(135deg, hsl(0 0% 100% / 0.06) 0%, hsl(0 0% 100% / 0.03) 100%)',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+            borderBottom: '1px solid hsl(0 0% 100% / 0.1)'
+          }}
+        >
           <div className="p-4 space-y-2">
             {/* Nav Links */}
             {navItems.map((item) => {
