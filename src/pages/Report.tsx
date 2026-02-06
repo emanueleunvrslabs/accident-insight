@@ -1,28 +1,50 @@
+import { useState } from 'react';
 import { FloatingNav } from '@/components/FloatingNav';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar as CalendarComponent } from '@/components/ui/calendar';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useIncidents, useIncidentStats } from '@/hooks/useIncidents';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ITALIAN_REGIONS, ACCIDENT_TYPE_LABELS } from '@/types/incident';
 import { 
   FileText, 
   Download, 
   Calendar,
-  Filter,
   FileSpreadsheet,
   FileJson,
   Printer,
-  Share2,
   Clock,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Settings2,
+  Sparkles,
+  MapPin,
+  Car,
+  Users,
+  BarChart3,
+  ChevronRight
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
 
+type ExportFormat = 'pdf' | 'excel' | 'json';
+
 export default function Report() {
   const { data: incidents, isLoading: incidentsLoading } = useIncidents({});
   const { data: stats, isLoading: statsLoading } = useIncidentStats();
+
+  const [dateFrom, setDateFrom] = useState<Date | undefined>(undefined);
+  const [dateTo, setDateTo] = useState<Date | undefined>(undefined);
+  const [selectedRegion, setSelectedRegion] = useState<string>('all');
+  const [selectedType, setSelectedType] = useState<string>('all');
+  const [exportFormat, setExportFormat] = useState<ExportFormat>('pdf');
+  const [includeStats, setIncludeStats] = useState(true);
+  const [includeCharts, setIncludeCharts] = useState(true);
+  const [includeDetails, setIncludeDetails] = useState(true);
 
   const isLoading = incidentsLoading || statsLoading;
 
@@ -51,6 +73,12 @@ export default function Report() {
       status: 'pending',
       type: 'PDF'
     }
+  ];
+
+  const formatOptions = [
+    { value: 'pdf', label: 'PDF', icon: FileText, color: 'text-destructive', bg: 'bg-destructive/10' },
+    { value: 'excel', label: 'Excel', icon: FileSpreadsheet, color: 'text-success', bg: 'bg-success/10' },
+    { value: 'json', label: 'JSON', icon: FileJson, color: 'text-warning', bg: 'bg-warning/10' },
   ];
 
   if (isLoading) {
@@ -144,69 +172,203 @@ export default function Report() {
             </Card>
           </div>
 
-          {/* Report Generator */}
-          <Card variant="glass" className="p-5">
-            <div className="flex items-center gap-2 mb-4">
-              <Filter className="h-5 w-5 text-primary" />
-              <h3 className="font-semibold">Genera Report Personalizzato</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Periodo</label>
-                <Button variant="glass" className="w-full justify-start">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  Seleziona date
-                </Button>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Regione</label>
-                <Button variant="glass" className="w-full justify-start">
-                  <Filter className="h-4 w-4 mr-2" />
-                  Tutte le regioni
-                </Button>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Formato</label>
-                <Button variant="glass" className="w-full justify-start">
-                  <FileText className="h-4 w-4 mr-2" />
-                  PDF
-                </Button>
+          {/* Custom Report Generator - Improved */}
+          <Card variant="glass" className="overflow-hidden">
+            {/* Header with gradient */}
+            <div className="p-5 border-b border-border/30 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-primary/10">
+                  <Settings2 className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Report Personalizzato</h3>
+                  <p className="text-sm text-muted-foreground">Configura i parametri per generare un report su misura</p>
+                </div>
               </div>
             </div>
-            <div className="flex gap-2">
-              <Button variant="glass" className="flex-1">
-                <Download className="h-4 w-4 mr-2" />
-                Genera Report
-              </Button>
-              <Button variant="glass" size="icon">
-                <Share2 className="h-4 w-4" />
-              </Button>
-            </div>
-          </Card>
 
-          {/* Data Summary */}
-          <Card variant="glass" className="p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold">Dati Disponibili per Export</h3>
-              <Badge variant="glass-success">{incidents?.length || 0} record</Badge>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="text-center p-3 rounded-xl bg-muted/20">
-                <div className="text-xl font-bold">{stats?.totalIncidents || 0}</div>
-                <div className="text-xs text-muted-foreground">Incidenti</div>
+            <div className="p-5 space-y-6">
+              {/* Filters Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* Date From */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    Data Inizio
+                  </label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="glass" className="w-full justify-start font-normal">
+                        {dateFrom ? format(dateFrom, 'dd/MM/yyyy') : 'Seleziona data'}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <CalendarComponent
+                        mode="single"
+                        selected={dateFrom}
+                        onSelect={setDateFrom}
+                        locale={it}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+
+                {/* Date To */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    Data Fine
+                  </label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="glass" className="w-full justify-start font-normal">
+                        {dateTo ? format(dateTo, 'dd/MM/yyyy') : 'Seleziona data'}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <CalendarComponent
+                        mode="single"
+                        selected={dateTo}
+                        onSelect={setDateTo}
+                        locale={it}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+
+                {/* Region */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-muted-foreground" />
+                    Regione
+                  </label>
+                  <Select value={selectedRegion} onValueChange={setSelectedRegion}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Tutte le regioni" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Tutte le regioni</SelectItem>
+                      {ITALIAN_REGIONS.map((region) => (
+                        <SelectItem key={region} value={region}>{region}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Accident Type */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <Car className="h-4 w-4 text-muted-foreground" />
+                    Tipo Incidente
+                  </label>
+                  <Select value={selectedType} onValueChange={setSelectedType}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Tutti i tipi" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Tutti i tipi</SelectItem>
+                      {Object.entries(ACCIDENT_TYPE_LABELS).map(([value, label]) => (
+                        <SelectItem key={value} value={value}>{label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div className="text-center p-3 rounded-xl bg-muted/20">
-                <div className="text-xl font-bold">{stats?.totalDeceased || 0}</div>
-                <div className="text-xs text-muted-foreground">Vittime</div>
+
+              {/* Format Selection */}
+              <div className="space-y-3">
+                <label className="text-sm font-medium">Formato Export</label>
+                <div className="grid grid-cols-3 gap-3">
+                  {formatOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => setExportFormat(option.value as ExportFormat)}
+                      className={`p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-2 ${
+                        exportFormat === option.value
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border/30 hover:border-border/60 hover:bg-muted/10'
+                      }`}
+                    >
+                      <div className={`p-2.5 rounded-lg ${option.bg}`}>
+                        <option.icon className={`h-5 w-5 ${option.color}`} />
+                      </div>
+                      <span className="font-medium text-sm">{option.label}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="text-center p-3 rounded-xl bg-muted/20">
-                <div className="text-xl font-bold">{Object.keys(stats?.byRegion || {}).length}</div>
-                <div className="text-xs text-muted-foreground">Regioni</div>
+
+              {/* Content Options */}
+              <div className="space-y-3">
+                <label className="text-sm font-medium">Contenuto Report</label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <label className="flex items-center gap-3 p-3 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer">
+                    <Checkbox 
+                      checked={includeStats} 
+                      onCheckedChange={(checked) => setIncludeStats(checked as boolean)} 
+                    />
+                    <div className="flex items-center gap-2">
+                      <BarChart3 className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-medium">Statistiche</span>
+                    </div>
+                  </label>
+                  <label className="flex items-center gap-3 p-3 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer">
+                    <Checkbox 
+                      checked={includeCharts} 
+                      onCheckedChange={(checked) => setIncludeCharts(checked as boolean)} 
+                    />
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 text-accent" />
+                      <span className="text-sm font-medium">Grafici</span>
+                    </div>
+                  </label>
+                  <label className="flex items-center gap-3 p-3 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer">
+                    <Checkbox 
+                      checked={includeDetails} 
+                      onCheckedChange={(checked) => setIncludeDetails(checked as boolean)} 
+                    />
+                    <div className="flex items-center gap-2">
+                      <Users className="h-4 w-4 text-success" />
+                      <span className="text-sm font-medium">Dettagli Vittime</span>
+                    </div>
+                  </label>
+                </div>
               </div>
-              <div className="text-center p-3 rounded-xl bg-muted/20">
-                <div className="text-xl font-bold">{Object.keys(stats?.byType || {}).length}</div>
-                <div className="text-xs text-muted-foreground">Tipologie</div>
+
+              {/* Preview Summary */}
+              <div className="p-4 rounded-xl bg-muted/10 border border-border/20">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm font-medium">Anteprima Selezione</span>
+                  <Badge variant="glass-primary">{incidents?.length || 0} record</Badge>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+                  <div className="p-2 rounded-lg bg-background/50">
+                    <div className="text-lg font-bold">{stats?.totalIncidents || 0}</div>
+                    <div className="text-[10px] text-muted-foreground uppercase">Incidenti</div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-background/50">
+                    <div className="text-lg font-bold text-destructive">{stats?.totalDeceased || 0}</div>
+                    <div className="text-[10px] text-muted-foreground uppercase">Vittime</div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-background/50">
+                    <div className="text-lg font-bold">{Object.keys(stats?.byRegion || {}).length}</div>
+                    <div className="text-[10px] text-muted-foreground uppercase">Regioni</div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-background/50">
+                    <div className="text-lg font-bold">{Object.keys(stats?.byType || {}).length}</div>
+                    <div className="text-[10px] text-muted-foreground uppercase">Tipologie</div>
+                  </div>
+                </div>
               </div>
+
+              {/* Generate Button */}
+              <Button className="w-full h-12 text-base font-medium bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/20">
+                <Download className="h-5 w-5 mr-2" />
+                Genera Report {exportFormat.toUpperCase()}
+                <ChevronRight className="h-5 w-5 ml-2" />
+              </Button>
             </div>
           </Card>
 
