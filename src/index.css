@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    /* Bandizzo Theme - Dark slate blue */
-    --background: 220 25% 10%;
+    /* Bandizzo Theme - Deep navy blue like reference */
+    --background: 215 35% 14%;
     --foreground: 0 0% 98%;
 
     --card: 220 25% 14%;
@@ -75,8 +75,8 @@
   }
 
   .dark {
-    /* Same as root - Dark slate blue */
-    --background: 220 25% 10%;
+    /* Same as root - Deep navy blue like reference */
+    --background: 215 35% 14%;
     --foreground: 0 0% 98%;
     --card: 220 25% 12%;
     --card-foreground: 0 0% 98%;
@@ -327,19 +327,21 @@
     transition: all 0.2s ease;
   }
 
-  /* Mesh gradient background - Azzurro style */
+  /* Mesh gradient background - Bandizzo style with golden glows */
   .mesh-gradient {
     background: 
-      radial-gradient(ellipse at 30% 20%, hsl(45 93% 47% / 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 70% 80%, hsl(45 93% 47% / 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 60% at 75% 30%, hsl(45 90% 55% / 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 50% at 25% 70%, hsl(45 90% 50% / 0.08) 0%, transparent 45%),
+      radial-gradient(ellipse 50% 40% at 85% 80%, hsl(35 85% 45% / 0.06) 0%, transparent 40%),
       hsl(var(--background));
   }
 
   /* Background gradient mesh utility */
   .bg-gradient-mesh {
     background: 
-      radial-gradient(ellipse at 30% 20%, hsl(45 93% 47% / 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 70% 80%, hsl(45 93% 47% / 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 60% at 75% 30%, hsl(45 90% 55% / 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 50% at 25% 70%, hsl(45 90% 50% / 0.08) 0%, transparent 45%),
+      radial-gradient(ellipse 50% 40% at 85% 80%, hsl(35 85% 45% / 0.06) 0%, transparent 40%),
       hsl(var(--background));
   }
 
