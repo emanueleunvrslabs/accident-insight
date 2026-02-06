@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calendar, ChevronDown, X, SlidersHorizontal, FileText, FileSpreadsheet } from 'lucide-react';
+import { Calendar, ChevronDown, X, SlidersHorizontal, FileText, FileSpreadsheet, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -20,9 +20,10 @@ interface FloatingFiltersProps {
   showFormatSelector?: boolean;
   exportFormat?: ExportFormat;
   onExportFormatChange?: (format: ExportFormat) => void;
+  onGenerate?: () => void;
 }
 
-export function FloatingFilters({ filters, onFiltersChange, showFormatSelector, exportFormat, onExportFormatChange }: FloatingFiltersProps) {
+export function FloatingFilters({ filters, onFiltersChange, showFormatSelector, exportFormat, onExportFormatChange, onGenerate }: FloatingFiltersProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [dateFrom, setDateFrom] = useState<Date | undefined>(
     filters.dateFrom ? new Date(filters.dateFrom) : undefined
@@ -215,6 +216,14 @@ export function FloatingFilters({ filters, onFiltersChange, showFormatSelector, 
                   Excel
                 </ToggleGroupItem>
               </ToggleGroup>
+              <Button 
+                size="sm" 
+                onClick={onGenerate}
+                className="h-8 px-4 rounded-full text-xs font-medium bg-primary hover:bg-primary/90 gap-1.5"
+              >
+                <Download className="h-3.5 w-3.5" />
+                Genera
+              </Button>
             </>
           )}
         </nav>
@@ -369,6 +378,13 @@ export function FloatingFilters({ filters, onFiltersChange, showFormatSelector, 
                       <span className="text-sm font-medium">Excel</span>
                     </button>
                   </div>
+                  <Button 
+                    onClick={onGenerate}
+                    className="w-full h-10 rounded-xl font-medium bg-primary hover:bg-primary/90 gap-2"
+                  >
+                    <Download className="h-4 w-4" />
+                    Genera {exportFormat?.toUpperCase()}
+                  </Button>
                 </div>
               )}
 

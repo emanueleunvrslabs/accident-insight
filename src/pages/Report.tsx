@@ -4,7 +4,7 @@ import { FloatingFilters } from '@/components/FloatingFilters';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Checkbox } from '@/components/ui/checkbox';
+
 import { useIncidents, useIncidentStats } from '@/hooks/useIncidents';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { IncidentFilters } from '@/types/incident';
@@ -16,10 +16,7 @@ import {
   CheckCircle,
   AlertCircle,
   Settings2,
-  Sparkles,
-  Users,
-  BarChart3,
-  ChevronRight
+  BarChart3
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
@@ -32,9 +29,6 @@ export default function Report() {
   const { data: stats, isLoading: statsLoading } = useIncidentStats();
 
   const [exportFormat, setExportFormat] = useState<ExportFormat>('pdf');
-  const [includeStats, setIncludeStats] = useState(true);
-  const [includeCharts, setIncludeCharts] = useState(true);
-  const [includeDetails, setIncludeDetails] = useState(true);
 
   const isLoading = incidentsLoading || statsLoading;
 
@@ -65,10 +59,6 @@ export default function Report() {
     }
   ];
 
-  const formatOptions = [
-    { value: 'pdf', label: 'PDF', icon: FileText, color: 'text-destructive', bg: 'bg-destructive/10' },
-    { value: 'excel', label: 'Excel', icon: FileSpreadsheet, color: 'text-success', bg: 'bg-success/10' },
-  ];
 
   if (isLoading) {
     return (
@@ -104,6 +94,7 @@ export default function Report() {
             showFormatSelector
             exportFormat={exportFormat}
             onExportFormatChange={setExportFormat}
+            onGenerate={() => console.log('Generate', exportFormat)}
           />
 
           {/* Custom Report Generator */}
@@ -122,43 +113,6 @@ export default function Report() {
             </div>
 
             <div className="p-4 sm:p-5 space-y-5 sm:space-y-6">
-
-              {/* Content Options */}
-              <div className="space-y-3">
-                <label className="text-xs sm:text-sm font-medium">Contenuto Report</label>
-                <div className="grid grid-cols-1 gap-2">
-                  <label className="flex items-center gap-3 p-3 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer">
-                    <Checkbox 
-                      checked={includeStats} 
-                      onCheckedChange={(checked) => setIncludeStats(checked as boolean)} 
-                    />
-                    <div className="flex items-center gap-2 flex-1">
-                      <BarChart3 className="h-4 w-4 text-primary" />
-                      <span className="text-sm font-medium">Statistiche</span>
-                    </div>
-                  </label>
-                  <label className="flex items-center gap-3 p-3 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer">
-                    <Checkbox 
-                      checked={includeCharts} 
-                      onCheckedChange={(checked) => setIncludeCharts(checked as boolean)} 
-                    />
-                    <div className="flex items-center gap-2 flex-1">
-                      <Sparkles className="h-4 w-4 text-accent" />
-                      <span className="text-sm font-medium">Grafici</span>
-                    </div>
-                  </label>
-                  <label className="flex items-center gap-3 p-3 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer">
-                    <Checkbox 
-                      checked={includeDetails} 
-                      onCheckedChange={(checked) => setIncludeDetails(checked as boolean)} 
-                    />
-                    <div className="flex items-center gap-2 flex-1">
-                      <Users className="h-4 w-4 text-success" />
-                      <span className="text-sm font-medium">Dettagli Vittime</span>
-                    </div>
-                  </label>
-                </div>
-              </div>
 
               {/* Preview Summary */}
               <div className="p-3 sm:p-4 rounded-xl bg-muted/10 border border-border/20">
@@ -186,12 +140,6 @@ export default function Report() {
                 </div>
               </div>
 
-              {/* Generate Button */}
-              <Button className="w-full h-11 sm:h-12 text-sm sm:text-base font-medium bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/20">
-                <Download className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                Genera {exportFormat.toUpperCase()}
-                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
-              </Button>
             </div>
           </Card>
 
