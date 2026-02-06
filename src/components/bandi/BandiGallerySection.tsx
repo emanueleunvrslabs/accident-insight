@@ -106,8 +106,15 @@ const BandoCard = ({ bando, index }: { bando: typeof bandi[0]; index: number }) 
       whileHover={{ y: -8, scale: 1.02 }}
       className="flex-shrink-0 w-[340px] md:w-[380px] h-[320px] group cursor-pointer"
     >
-      <div 
-        className="relative h-full rounded-2xl p-6 glass-card-hover flex flex-col"
+      <div
+        className="relative h-full rounded-2xl p-6 flex flex-col overflow-hidden transition-all duration-500 ease-out group-hover:-translate-y-0.5"
+        style={{
+          background: 'linear-gradient(135deg, hsl(0 0% 100% / 0.12) 0%, hsl(0 0% 100% / 0.06) 50%, hsl(0 0% 100% / 0.03) 100%)',
+          backdropFilter: 'blur(40px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+          border: '1px solid hsl(0 0% 100% / 0.18)',
+          boxShadow: '0 8px 32px hsl(0 0% 0% / 0.12), inset 0 1px 0 0 hsl(0 0% 100% / 0.15), inset 0 -1px 0 0 hsl(0 0% 0% / 0.05)'
+        }}
       >
         {/* Top Row - Category & Match Badge */}
         <div className="flex items-center justify-between mb-4">
