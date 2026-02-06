@@ -26,12 +26,12 @@ export function AddMenu() {
             <span className="hidden sm:inline">Aggiungi</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-52 rounded-xl bg-popover border border-border shadow-lg z-50">
+        <DropdownMenuContent align="end" className="w-52 rounded-xl liquid-glass border-0 shadow-lg z-50">
           <DropdownMenuItem 
             onClick={() => setArticleOpen(true)}
-            className="gap-3 py-3 cursor-pointer rounded-lg focus:bg-accent"
+            className="gap-3 py-3 cursor-pointer rounded-lg hover:bg-primary/15 focus:bg-primary/15 data-[highlighted]:bg-primary/15"
           >
-            <div className="p-2 rounded-lg bg-primary/10">
+            <div className="p-2 rounded-lg bg-primary/15">
               <FileText className="h-4 w-4 text-primary" />
             </div>
             <div>
@@ -41,10 +41,10 @@ export function AddMenu() {
           </DropdownMenuItem>
           <DropdownMenuItem 
             onClick={() => setFeedsOpen(true)}
-            className="gap-3 py-3 cursor-pointer rounded-lg focus:bg-accent"
+            className="gap-3 py-3 cursor-pointer rounded-lg hover:bg-primary/15 focus:bg-primary/15 data-[highlighted]:bg-primary/15"
           >
-            <div className="p-2 rounded-lg bg-accent/10">
-              <Rss className="h-4 w-4 text-accent" />
+            <div className="p-2 rounded-lg bg-primary/15">
+              <Rss className="h-4 w-4 text-primary" />
             </div>
             <div>
               <div className="font-medium text-foreground">Fonte</div>
