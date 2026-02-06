@@ -327,12 +327,12 @@
     transition: all 0.2s ease;
   }
 
-  /* Mesh gradient background - Bandizzo style */
+  /* Mesh gradient background - Azzurro style */
   .mesh-gradient {
     background: 
       radial-gradient(ellipse at 30% 20%, hsl(45 93% 47% / 0.06) 0%, transparent 50%),
       radial-gradient(ellipse at 70% 80%, hsl(45 93% 47% / 0.04) 0%, transparent 50%),
-      hsl(220 25% 10%);
+      hsl(var(--background));
   }
 
   /* Background gradient mesh utility */
@@ -340,7 +340,7 @@
     background: 
       radial-gradient(ellipse at 30% 20%, hsl(45 93% 47% / 0.06) 0%, transparent 50%),
       radial-gradient(ellipse at 70% 80%, hsl(45 93% 47% / 0.04) 0%, transparent 50%),
-      hsl(220 25% 10%);
+      hsl(var(--background));
   }
 
   /* iOS-style pill badges */
