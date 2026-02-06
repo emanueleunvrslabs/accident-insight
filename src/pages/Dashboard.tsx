@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { Scale, Shield, BarChart3, Sparkles } from 'lucide-react';
+import { Shield, BarChart3 } from 'lucide-react';
 import { StatsCards } from '@/components/dashboard/StatsCards';
 import { IncidentFiltersBar } from '@/components/incidents/IncidentFilters';
 import { IncidentList } from '@/components/incidents/IncidentList';
 import { IncidentDetail } from '@/components/incidents/IncidentDetail';
-import { AddArticleDialog } from '@/components/incidents/AddArticleDialog';
-import { ManageFeedsDialog } from '@/components/feeds/ManageFeedsDialog';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { FloatingNav } from '@/components/FloatingNav';
 import type { IncidentFilters } from '@/types/incident';
 
 export default function Dashboard() {
@@ -15,35 +13,11 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-mesh">
-      {/* Header - Glass effect */}
-      <header className="sticky top-0 z-50 glass-strong border-b-0">
-        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-              <div className="relative p-2 sm:p-2.5 rounded-2xl bg-gradient-to-br from-primary to-accent shrink-0 shadow-glow">
-                <Scale className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                <Sparkles className="absolute -top-1 -right-1 h-3 w-3 text-warning animate-pulse-soft" />
-              </div>
-              <div className="min-w-0">
-                <h1 className="text-base sm:text-xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
-                  Monitoraggio Incidenti
-                </h1>
-                <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">
-                  Sistema AI per sinistri stradali mortali
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <ThemeToggle />
-              <ManageFeedsDialog />
-              <AddArticleDialog />
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Floating Navigation */}
+      <FloatingNav />
 
-      {/* Main content */}
-      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
+      {/* Main content - add top padding for floating nav */}
+      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pt-20 sm:pt-24">
         {selectedIncidentId ? (
           <IncidentDetail
             incidentId={selectedIncidentId}
