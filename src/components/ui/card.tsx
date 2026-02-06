@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "rounded-2xl text-card-foreground transition-all duration-300",
+  "rounded-2xl text-card-foreground transition-all duration-500 ease-out",
   {
     variants: {
       variant: {
@@ -19,11 +19,15 @@ const cardVariants = cva(
         "glass-strong": [
           "glass-strong",
         ].join(" "),
+        "liquid-glass": [
+          "relative overflow-hidden",
+          "hover:-translate-y-0.5",
+        ].join(" "),
         elevated: "border border-border/50 bg-card shadow-liquid",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "glass",
     },
   }
 );
