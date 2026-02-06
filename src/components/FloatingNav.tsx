@@ -1,4 +1,4 @@
-import { Scale } from 'lucide-react';
+import { Car } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { ManageFeedsDialog } from './feeds/ManageFeedsDialog';
 import { AddArticleDialog } from './incidents/AddArticleDialog';
@@ -31,9 +31,9 @@ export function FloatingNav() {
         {/* Logo */}
         <div className="flex items-center gap-2.5 px-4 pr-5 border-r border-border/30">
           <div className="p-2 rounded-xl bg-primary shadow-sm">
-            <Scale className="h-4 w-4 text-primary-foreground" />
+            <Car className="h-4 w-4 text-primary-foreground" />
           </div>
-          <span className="font-semibold text-sm text-foreground hidden sm:block">LexMonitor</span>
+          <span className="font-semibold text-sm text-foreground hidden sm:block">Angelini</span>
         </div>
 
         {/* Nav Items */}
