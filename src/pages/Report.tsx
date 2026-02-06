@@ -109,67 +109,14 @@ export default function Report() {
       <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pt-20 sm:pt-24">
         <div className="space-y-6">
           {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-primary/10">
-                <FileText className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-bold">Report</h1>
-                <p className="text-muted-foreground text-sm">Genera e scarica report personalizzati</p>
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="p-3 rounded-2xl bg-primary/10">
+              <FileText className="h-6 w-6 text-primary" />
             </div>
-          </div>
-
-          {/* Quick Export Options */}
-          <div className="grid grid-cols-4 gap-2 sm:gap-4">
-            <Card variant="glass" className="p-3 sm:p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
-              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
-                <div className="p-2 sm:p-3 rounded-xl bg-destructive/10 group-hover:bg-destructive/20 transition-colors">
-                  <FileText className="h-5 w-5 sm:h-6 sm:w-6 text-destructive" />
-                </div>
-                <div>
-                  <div className="font-medium text-xs sm:text-sm">PDF</div>
-                  <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Report completo</div>
-                </div>
-              </div>
-            </Card>
-
-            <Card variant="glass" className="p-3 sm:p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
-              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
-                <div className="p-2 sm:p-3 rounded-xl bg-success/10 group-hover:bg-success/20 transition-colors">
-                  <FileSpreadsheet className="h-5 w-5 sm:h-6 sm:w-6 text-success" />
-                </div>
-                <div>
-                  <div className="font-medium text-xs sm:text-sm">Excel</div>
-                  <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Dati tabellari</div>
-                </div>
-              </div>
-            </Card>
-
-            <Card variant="glass" className="p-3 sm:p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
-              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
-                <div className="p-2 sm:p-3 rounded-xl bg-warning/10 group-hover:bg-warning/20 transition-colors">
-                  <FileJson className="h-5 w-5 sm:h-6 sm:w-6 text-warning" />
-                </div>
-                <div>
-                  <div className="font-medium text-xs sm:text-sm">JSON</div>
-                  <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Dati grezzi</div>
-                </div>
-              </div>
-            </Card>
-
-            <Card variant="glass" className="p-3 sm:p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
-              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
-                <div className="p-2 sm:p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <Printer className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                </div>
-                <div>
-                  <div className="font-medium text-xs sm:text-sm">Stampa</div>
-                  <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Stampabile</div>
-                </div>
-              </div>
-            </Card>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold">Report</h1>
+              <p className="text-muted-foreground text-sm">Genera report personalizzati</p>
+            </div>
           </div>
 
           {/* Custom Report Generator - Improved */}
