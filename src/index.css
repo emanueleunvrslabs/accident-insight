@@ -65,27 +65,27 @@
   }
 
   .dark {
-    /* Deep blue-teal background like Bandizzo example */
-    --background: 200 50% 10%;
-    --foreground: 200 15% 93%;
+    /* Lighter blue-teal background like Bandizzo example */
+    --background: 200 45% 14%;
+    --foreground: 200 15% 95%;
 
-    --card: 200 45% 13%;
-    --card-foreground: 200 15% 93%;
+    --card: 200 40% 17%;
+    --card-foreground: 200 15% 95%;
 
-    --popover: 200 45% 12%;
-    --popover-foreground: 200 15% 93%;
+    --popover: 200 40% 16%;
+    --popover-foreground: 200 15% 95%;
 
     --primary: 38 85% 55%;
-    --primary-foreground: 200 50% 8%;
+    --primary-foreground: 200 45% 10%;
 
-    --secondary: 200 40% 16%;
-    --secondary-foreground: 200 15% 88%;
+    --secondary: 200 35% 20%;
+    --secondary-foreground: 200 15% 90%;
 
-    --muted: 200 40% 14%;
-    --muted-foreground: 200 15% 55%;
+    --muted: 200 35% 18%;
+    --muted-foreground: 200 15% 60%;
 
     --accent: 38 80% 50%;
-    --accent-foreground: 200 50% 8%;
+    --accent-foreground: 200 45% 10%;
 
     --destructive: 0 55% 48%;
     --destructive-foreground: 0 0% 100%;
@@ -94,30 +94,30 @@
     --success-foreground: 0 0% 100%;
 
     --warning: 38 85% 55%;
-    --warning-foreground: 200 50% 8%;
+    --warning-foreground: 200 45% 10%;
 
-    --border: 200 35% 20%;
-    --input: 200 40% 16%;
+    --border: 200 30% 24%;
+    --input: 200 35% 20%;
     --ring: 38 85% 55%;
 
     /* Liquid Glass - Dark mode with blue tints */
-    --glass-bg: 200 45% 12% / 0.8;
-    --glass-bg-strong: 200 45% 11% / 0.92;
-    --glass-bg-subtle: 200 40% 16% / 0.65;
-    --glass-border: 200 30% 30% / 0.5;
-    --glass-border-outer: 200 30% 35% / 0.3;
+    --glass-bg: 200 40% 16% / 0.82;
+    --glass-bg-strong: 200 40% 15% / 0.94;
+    --glass-bg-subtle: 200 35% 20% / 0.7;
+    --glass-border: 200 25% 32% / 0.5;
+    --glass-border-outer: 200 25% 38% / 0.3;
     --glass-blur: 24px;
     --glass-blur-strong: 40px;
-    --glass-highlight: 38 70% 70% / 0.1;
-    --glass-shadow: 200 60% 3% / 0.55;
+    --glass-highlight: 38 70% 70% / 0.08;
+    --glass-shadow: 200 50% 5% / 0.45;
 
-    --sidebar-background: 200 50% 8%;
-    --sidebar-foreground: 200 15% 88%;
+    --sidebar-background: 200 45% 12%;
+    --sidebar-foreground: 200 15% 90%;
     --sidebar-primary: 38 85% 55%;
-    --sidebar-primary-foreground: 200 50% 8%;
-    --sidebar-accent: 200 40% 14%;
-    --sidebar-accent-foreground: 200 15% 88%;
-    --sidebar-border: 200 35% 18%;
+    --sidebar-primary-foreground: 200 45% 10%;
+    --sidebar-accent: 200 35% 18%;
+    --sidebar-accent-foreground: 200 15% 90%;
+    --sidebar-border: 200 30% 22%;
     --sidebar-ring: 38 85% 55%;
   }
 }
