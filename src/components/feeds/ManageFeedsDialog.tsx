@@ -107,13 +107,13 @@ export function ManageFeedsDialog() {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="gap-1 sm:gap-2 px-2 sm:px-3 h-9 rounded-xl bg-muted/50 hover:bg-muted/80"
+          className="gap-2 px-3 h-9 rounded-xl bg-muted/50 hover:bg-muted/80 w-full md:w-auto justify-start md:justify-center"
         >
           <Rss className="h-4 w-4" />
-          <span className="hidden sm:inline">Fonti</span>
+          <span>Gestisci Fonti</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] max-h-[85vh] rounded-2xl glass border-0">
+      <DialogContent className="w-[calc(100vw-2rem)] max-w-[600px] max-h-[85vh] rounded-2xl glass border-0 mx-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Globe className="h-5 w-5 text-primary" />
@@ -125,8 +125,8 @@ export function ManageFeedsDialog() {
         </DialogHeader>
 
         {/* Add new feed form */}
-        <form onSubmit={handleSubmit} className="space-y-4 border-b border-border/50 pb-4">
-          <div className="grid grid-cols-2 gap-3">
+        <form onSubmit={handleSubmit} className="space-y-3 border-b border-border/50 pb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-xs">Nome fonte</Label>
               <Input

@@ -122,51 +122,51 @@ export default function Report() {
           </div>
 
           {/* Quick Export Options */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            <Card variant="glass" className="p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="p-3 rounded-xl bg-destructive/10 group-hover:bg-destructive/20 transition-colors">
-                  <FileText className="h-6 w-6 text-destructive" />
+          <div className="grid grid-cols-4 gap-2 sm:gap-4">
+            <Card variant="glass" className="p-3 sm:p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
+              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
+                <div className="p-2 sm:p-3 rounded-xl bg-destructive/10 group-hover:bg-destructive/20 transition-colors">
+                  <FileText className="h-5 w-5 sm:h-6 sm:w-6 text-destructive" />
                 </div>
                 <div>
-                  <div className="font-medium text-sm">Export PDF</div>
-                  <div className="text-xs text-muted-foreground">Report completo</div>
+                  <div className="font-medium text-xs sm:text-sm">PDF</div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Report completo</div>
                 </div>
               </div>
             </Card>
 
-            <Card variant="glass" className="p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="p-3 rounded-xl bg-success/10 group-hover:bg-success/20 transition-colors">
-                  <FileSpreadsheet className="h-6 w-6 text-success" />
+            <Card variant="glass" className="p-3 sm:p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
+              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
+                <div className="p-2 sm:p-3 rounded-xl bg-success/10 group-hover:bg-success/20 transition-colors">
+                  <FileSpreadsheet className="h-5 w-5 sm:h-6 sm:w-6 text-success" />
                 </div>
                 <div>
-                  <div className="font-medium text-sm">Export Excel</div>
-                  <div className="text-xs text-muted-foreground">Dati tabellari</div>
+                  <div className="font-medium text-xs sm:text-sm">Excel</div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Dati tabellari</div>
                 </div>
               </div>
             </Card>
 
-            <Card variant="glass" className="p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="p-3 rounded-xl bg-warning/10 group-hover:bg-warning/20 transition-colors">
-                  <FileJson className="h-6 w-6 text-warning" />
+            <Card variant="glass" className="p-3 sm:p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
+              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
+                <div className="p-2 sm:p-3 rounded-xl bg-warning/10 group-hover:bg-warning/20 transition-colors">
+                  <FileJson className="h-5 w-5 sm:h-6 sm:w-6 text-warning" />
                 </div>
                 <div>
-                  <div className="font-medium text-sm">Export JSON</div>
-                  <div className="text-xs text-muted-foreground">Dati grezzi</div>
+                  <div className="font-medium text-xs sm:text-sm">JSON</div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Dati grezzi</div>
                 </div>
               </div>
             </Card>
 
-            <Card variant="glass" className="p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <Printer className="h-6 w-6 text-primary" />
+            <Card variant="glass" className="p-3 sm:p-4 hover:scale-[1.02] transition-transform cursor-pointer group">
+              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
+                <div className="p-2 sm:p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <Printer className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                 </div>
                 <div>
-                  <div className="font-medium text-sm">Stampa</div>
-                  <div className="text-xs text-muted-foreground">Versione stampabile</div>
+                  <div className="font-medium text-xs sm:text-sm">Stampa</div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">Stampabile</div>
                 </div>
               </div>
             </Card>
@@ -187,12 +187,12 @@ export default function Report() {
               </div>
             </div>
 
-            <div className="p-5 space-y-6">
+            <div className="p-4 sm:p-5 space-y-5 sm:space-y-6">
               {/* Filters Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {/* Date From */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium flex items-center gap-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-muted-foreground" />
                     Data Inizio
                   </label>
@@ -216,7 +216,7 @@ export default function Report() {
 
                 {/* Date To */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium flex items-center gap-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-muted-foreground" />
                     Data Fine
                   </label>
@@ -240,7 +240,7 @@ export default function Report() {
 
                 {/* Region */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium flex items-center gap-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-muted-foreground" />
                     Regione
                   </label>
@@ -259,7 +259,7 @@ export default function Report() {
 
                 {/* Accident Type */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium flex items-center gap-2">
+                  <label className="text-xs sm:text-sm font-medium flex items-center gap-2">
                     <Car className="h-4 w-4 text-muted-foreground" />
                     Tipo Incidente
                   </label>
@@ -279,22 +279,22 @@ export default function Report() {
 
               {/* Format Selection */}
               <div className="space-y-3">
-                <label className="text-sm font-medium">Formato Export</label>
-                <div className="grid grid-cols-3 gap-3">
+                <label className="text-xs sm:text-sm font-medium">Formato Export</label>
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {formatOptions.map((option) => (
                     <button
                       key={option.value}
                       onClick={() => setExportFormat(option.value as ExportFormat)}
-                      className={`p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-2 ${
+                      className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-1.5 sm:gap-2 ${
                         exportFormat === option.value
                           ? 'border-primary bg-primary/5'
                           : 'border-border/30 hover:border-border/60 hover:bg-muted/10'
                       }`}
                     >
-                      <div className={`p-2.5 rounded-lg ${option.bg}`}>
-                        <option.icon className={`h-5 w-5 ${option.color}`} />
+                      <div className={`p-2 sm:p-2.5 rounded-lg ${option.bg}`}>
+                        <option.icon className={`h-4 w-4 sm:h-5 sm:w-5 ${option.color}`} />
                       </div>
-                      <span className="font-medium text-sm">{option.label}</span>
+                      <span className="font-medium text-xs sm:text-sm">{option.label}</span>
                     </button>
                   ))}
                 </div>
@@ -302,14 +302,14 @@ export default function Report() {
 
               {/* Content Options */}
               <div className="space-y-3">
-                <label className="text-sm font-medium">Contenuto Report</label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <label className="text-xs sm:text-sm font-medium">Contenuto Report</label>
+                <div className="grid grid-cols-1 gap-2">
                   <label className="flex items-center gap-3 p-3 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer">
                     <Checkbox 
                       checked={includeStats} 
                       onCheckedChange={(checked) => setIncludeStats(checked as boolean)} 
                     />
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-1">
                       <BarChart3 className="h-4 w-4 text-primary" />
                       <span className="text-sm font-medium">Statistiche</span>
                     </div>
@@ -319,7 +319,7 @@ export default function Report() {
                       checked={includeCharts} 
                       onCheckedChange={(checked) => setIncludeCharts(checked as boolean)} 
                     />
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-1">
                       <Sparkles className="h-4 w-4 text-accent" />
                       <span className="text-sm font-medium">Grafici</span>
                     </div>
@@ -329,7 +329,7 @@ export default function Report() {
                       checked={includeDetails} 
                       onCheckedChange={(checked) => setIncludeDetails(checked as boolean)} 
                     />
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-1">
                       <Users className="h-4 w-4 text-success" />
                       <span className="text-sm font-medium">Dettagli Vittime</span>
                     </div>
@@ -338,36 +338,36 @@ export default function Report() {
               </div>
 
               {/* Preview Summary */}
-              <div className="p-4 rounded-xl bg-muted/10 border border-border/20">
+              <div className="p-3 sm:p-4 rounded-xl bg-muted/10 border border-border/20">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-medium">Anteprima Selezione</span>
-                  <Badge variant="glass-primary">{incidents?.length || 0} record</Badge>
+                  <span className="text-xs sm:text-sm font-medium">Anteprima</span>
+                  <Badge variant="glass-primary" size="sm">{incidents?.length || 0} record</Badge>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+                <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
                   <div className="p-2 rounded-lg bg-background/50">
-                    <div className="text-lg font-bold">{stats?.totalIncidents || 0}</div>
-                    <div className="text-[10px] text-muted-foreground uppercase">Incidenti</div>
+                    <div className="text-base sm:text-lg font-bold">{stats?.totalIncidents || 0}</div>
+                    <div className="text-[8px] sm:text-[10px] text-muted-foreground uppercase">Incidenti</div>
                   </div>
                   <div className="p-2 rounded-lg bg-background/50">
-                    <div className="text-lg font-bold text-destructive">{stats?.totalDeceased || 0}</div>
-                    <div className="text-[10px] text-muted-foreground uppercase">Vittime</div>
+                    <div className="text-base sm:text-lg font-bold text-destructive">{stats?.totalDeceased || 0}</div>
+                    <div className="text-[8px] sm:text-[10px] text-muted-foreground uppercase">Vittime</div>
                   </div>
                   <div className="p-2 rounded-lg bg-background/50">
-                    <div className="text-lg font-bold">{Object.keys(stats?.byRegion || {}).length}</div>
-                    <div className="text-[10px] text-muted-foreground uppercase">Regioni</div>
+                    <div className="text-base sm:text-lg font-bold">{Object.keys(stats?.byRegion || {}).length}</div>
+                    <div className="text-[8px] sm:text-[10px] text-muted-foreground uppercase">Regioni</div>
                   </div>
                   <div className="p-2 rounded-lg bg-background/50">
-                    <div className="text-lg font-bold">{Object.keys(stats?.byType || {}).length}</div>
-                    <div className="text-[10px] text-muted-foreground uppercase">Tipologie</div>
+                    <div className="text-base sm:text-lg font-bold">{Object.keys(stats?.byType || {}).length}</div>
+                    <div className="text-[8px] sm:text-[10px] text-muted-foreground uppercase">Tipi</div>
                   </div>
                 </div>
               </div>
 
               {/* Generate Button */}
-              <Button className="w-full h-12 text-base font-medium bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/20">
-                <Download className="h-5 w-5 mr-2" />
-                Genera Report {exportFormat.toUpperCase()}
-                <ChevronRight className="h-5 w-5 ml-2" />
+              <Button className="w-full h-11 sm:h-12 text-sm sm:text-base font-medium bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/20">
+                <Download className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+                Genera {exportFormat.toUpperCase()}
+                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
               </Button>
             </div>
           </Card>

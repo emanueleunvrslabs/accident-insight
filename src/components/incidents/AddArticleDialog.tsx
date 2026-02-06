@@ -79,13 +79,13 @@ export function AddArticleDialog() {
       <DialogTrigger asChild>
         <Button 
           size="sm" 
-          className="gap-1 sm:gap-2 px-2 sm:px-3 h-9 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-glow"
+          className="gap-2 px-3 h-9 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-glow"
         >
           <Plus className="h-4 w-4" />
           <span className="hidden sm:inline">Aggiungi</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px] rounded-2xl glass border-0">
+      <DialogContent className="w-[calc(100vw-2rem)] max-w-[500px] rounded-2xl glass border-0 mx-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-primary" />
