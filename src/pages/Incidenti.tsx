@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FloatingNav } from '@/components/FloatingNav';
-import { Card } from '@/components/ui/card';
-import { IncidentFiltersBar } from '@/components/incidents/IncidentFilters';
+import { FloatingFilters } from '@/components/FloatingFilters';
 import { IncidentList } from '@/components/incidents/IncidentList';
 import { IncidentDetail } from '@/components/incidents/IncidentDetail';
 import { AlertTriangle } from 'lucide-react';
@@ -21,8 +20,9 @@ export default function Incidenti() {
   return (
     <div className="min-h-screen bg-gradient-mesh">
       <FloatingNav />
+      <FloatingFilters filters={filters} onFiltersChange={setFilters} />
       
-      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pt-20 sm:pt-24">
+      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 pt-32 md:pt-36">
         {selectedIncidentId ? (
           <IncidentDetail
             incidentId={selectedIncidentId}
@@ -40,11 +40,6 @@ export default function Incidenti() {
                 <p className="text-muted-foreground text-sm">Elenco completo degli incidenti monitorati</p>
               </div>
             </div>
-
-            {/* Filters */}
-            <Card variant="glass-subtle" className="p-3 sm:p-4">
-              <IncidentFiltersBar filters={filters} onFiltersChange={setFilters} />
-            </Card>
 
             {/* Incident list */}
             <IncidentList
