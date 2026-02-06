@@ -240,10 +240,9 @@
 
   .dark .bg-gradient-mesh {
     background: 
-      radial-gradient(ellipse 70% 50% at 80% 15%, hsl(38 80% 50% / 0.35) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 40% at 90% 25%, hsl(45 90% 55% / 0.25) 0%, transparent 45%),
-      radial-gradient(ellipse 40% 35% at 95% 60%, hsl(35 75% 45% / 0.2) 0%, transparent 40%),
-      radial-gradient(ellipse 30% 25% at 85% 75%, hsl(30 70% 40% / 0.15) 0%, transparent 35%),
+      radial-gradient(ellipse 120% 90% at 85% 10%, hsl(38 70% 45% / 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 90% 70% at 95% 30%, hsl(42 65% 50% / 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 60% at 100% 50%, hsl(35 60% 40% / 0.08) 0%, transparent 50%),
       hsl(var(--background));
   }
 
