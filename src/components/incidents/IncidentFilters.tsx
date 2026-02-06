@@ -62,17 +62,6 @@ export function IncidentFiltersBar({ filters, onFiltersChange }: IncidentFilters
 
   return (
     <div className="space-y-3 sm:space-y-4">
-      {/* Search bar - Glass style */}
-      <div className="relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          variant="glass"
-          placeholder="Cerca per città o descrizione..."
-          className="pl-11"
-          value={filters.searchQuery || ''}
-          onChange={(e) => handleSearchChange(e.target.value)}
-        />
-      </div>
 
       {/* Mobile: Collapsible filters */}
       <div className="sm:hidden">
